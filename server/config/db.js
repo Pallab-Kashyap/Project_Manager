@@ -9,7 +9,8 @@ const host = process.env.DB_HOST
 
 const sequelize = new Sequelize(name, user, password, {
     host: host,
-    dialect: 'postgres'
+    dialect: 'postgres',
+    logging: false
 })
 
 const connectDB = async () => {
