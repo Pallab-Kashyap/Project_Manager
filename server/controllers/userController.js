@@ -8,9 +8,8 @@ const asyncWrapper = require("../utils/asyncWrapper");
 
 const findUser =  async(email) => {
     let user = await Users.findOne({
-        where: {
-            email: email
-        }
+        where: { email: email },
+        attributes: { exclude: ['createdAt', 'updatedAt']}
     })
 
     if(user) user = user.toJSON()

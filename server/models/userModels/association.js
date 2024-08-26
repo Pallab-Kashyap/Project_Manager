@@ -15,8 +15,12 @@ UserInfo.hasOne(CompanyInfo, { foreignKey: 'user_info_id' });
 CompanyInfo.belongsTo(UserInfo, { foreignKey: 'user_info_id' });
 
 await sequelize.sync({ alter: true });
+
+
 }
 
 sycnDB()
+
+// sequelize.drop()
 
 // module.exports = sycnDB

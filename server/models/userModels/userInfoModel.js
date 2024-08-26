@@ -15,8 +15,7 @@ const UserInfo = sequelize.define('UserInfo', {
           key: 'id'       // Primary key in the UserInfo table
         },
         unique: true,
-        onDelete: 'CASCADE', // Optional: If a user is deleted, delete related student info
-        onUpdate: 'CASCADE'  // Optional: Update userId in student info when it's updated in the users table
+        onDelete: 'CASCADE', 
       },
     occupation: {
         type: DataTypes.STRING,
