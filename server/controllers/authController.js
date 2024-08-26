@@ -1,4 +1,4 @@
-const Users = require("../models/users")
+const Users = require("../models/userModels/usersModel")
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const asyncWrapper = require("../utils/asyncWrapper")
@@ -54,10 +54,8 @@ const loginUser = asyncWrapper(async (req, res, next) => {
         return res.status(400).json({status: false, message: 'all fields required'})
 
     let user = await findUser(email)
- 
-    if(!user) return res.status(409).json(resData(false, "user doesn't exists", null))
 
-    user = user.toJSON();
+    if(!user) return res.status(409).json(resData(false, "user doesn't exists", null))
 
     const isMatch = await bcrypt.compare(password, user.password)
 

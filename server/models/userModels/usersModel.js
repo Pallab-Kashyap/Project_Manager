@@ -1,13 +1,13 @@
-const { sequelize } = require("../config/db");
-const { DataTypes } = require("sequelize");
+const { sequelize } = require("../../config/db");
+const { Sequelize, DataTypes } = require("sequelize");
 
 const Users = sequelize.define(
   "Users",
   {
     id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.INTEGER,
       primaryKey: true,
+      autoIncrement: true,
     },
     first_name: {
       type: DataTypes.STRING,
@@ -54,10 +54,9 @@ const Users = sequelize.define(
     },
   },
   {
+    tableName: "Users",
     timestamps: true,
   }
 );
-
-sequelize.sync({ alter: true });
 
 module.exports = Users;
