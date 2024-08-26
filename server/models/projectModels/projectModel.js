@@ -36,7 +36,7 @@ const Project = sequelize.define('Project', {
     },
     leader_board: {
         type: DataTypes.BOOLEAN,
-        defaultValue: false,
+        defaultValue: true,
     },
     project_status: {
         type: DataTypes.STRING,

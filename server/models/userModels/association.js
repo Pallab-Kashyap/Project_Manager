@@ -14,13 +14,16 @@ StudentInfo.belongsTo(UserInfo, { foreignKey: 'user_info_id' });
 UserInfo.hasOne(CompanyInfo, { foreignKey: 'user_info_id' });
 CompanyInfo.belongsTo(UserInfo, { foreignKey: 'user_info_id' });
 
-await sequelize.sync({ alter: true });
-
-
+ sequelize.sync({ alter: true })
+    .then(() => console.log('s'))
+    .catch((err) => console.log(err))
 }
 
 sycnDB()
 
-// sequelize.drop()
-
-// module.exports = sycnDB
+module.exports = {
+    Users,
+    UserInfo,
+    StudentInfo,
+    CompanyInfo
+}
