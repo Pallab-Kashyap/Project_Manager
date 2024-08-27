@@ -33,6 +33,10 @@ const ProjectMember = sequelize.define('ProjectMember', {
         defaultValue: MEMBER_POSITION.MEMBER,
         allowNull: false,
     },
+    access: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+    }
 },
 {
     tableName: "ProjectMember",

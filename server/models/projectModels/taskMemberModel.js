@@ -10,15 +10,6 @@ const TaskMember = sequelize.define('TaskMember', {
         autoIncrement: true,
         primaryKey: true,
     },
-    member_id: {
-        type: DataTypes.BIGINT,
-        references: {
-            model: User, // Name of the model being referenced
-            key: 'id'       // Primary key in the UserInfo table
-          },
-          onDelete: 'CASCADE',
-        allowNull: false,
-    },
     task_id: {
         type: DataTypes.BIGINT,
         type: DataTypes.BIGINT,

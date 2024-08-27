@@ -7,9 +7,11 @@ const cookieParser = require("cookie-parser");
 const userRouter = require("./routes/userRouter");
 const authRouter = require("./routes/authRouter");
 const errorHandle = require("./utils/errorHandle");
+const { sycnDB } = require("./models");
 
 dotenv.config();
 connectDB();
+sycnDB()
 
 const app = express();
 

@@ -1,11 +1,8 @@
 const resData = require("../utils/apiRes");
 const { sequelize } = require("../config/db");
 const asyncWrapper = require("../utils/asyncWrapper");
-// const Users = require("../models/userModels/usersModel");
-// const UserInfo = require("../models/userModels/userInfoModel");
-// const StudentInfo = require("../models/userModels/studentModel");
-const CompanyInfo = require("../models/userModels/companyModel");
-const { Users, UserInfo, StudentInfo } = require('../models/userModels/association')
+
+const { Users, UserInfo, StudentInfo, CompanyInfo } = require('../models/index')
 
 const findUser = async (email) => {
   let user = await Users.findOne({
