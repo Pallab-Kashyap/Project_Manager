@@ -13,8 +13,8 @@ const ProjectMember = sequelize.define('ProjectMember', {
     project_id: {
         type: DataTypes.BIGINT,
         references: {
-            model: Project, // Name of the model being referenced
-            key: 'id'       // Primary key in the UserInfo table
+            model: Project, 
+            key: 'id'      
           },
           onDelete: 'CASCADE',
         allowNull: false,
@@ -22,8 +22,8 @@ const ProjectMember = sequelize.define('ProjectMember', {
     user_id: {
         type: DataTypes.BIGINT,
         references: {
-            model: User, // Name of the model being referenced
-            key: 'id'       // Primary key in the UserInfo table
+            model: User, 
+            key: 'id'   
           },
           onDelete: 'CASCADE',
         allowNull: false,
@@ -35,7 +35,10 @@ const ProjectMember = sequelize.define('ProjectMember', {
     },
     access: {
         type: DataTypes.BOOLEAN,
-        defaultValue: false,
+        // defaultValue: false,
+    },
+    task_completed: {
+        type: DataTypes.INTEGER,
     }
 },
 {

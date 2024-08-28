@@ -7,6 +7,9 @@ const { findUser } = require("../controllers/userController");
 const auth = asyncWrapper(async (req, res, next) => {
   const token = req.cookies.token;
 
+  if(!token) 
+    return res.status(401).json(resData(false, 'unauthorized user', null))
+
   const { userId, email } = jwt.verify(token, process.env.JWT_SECRET_KEY);
 
   if (!(userId && email))

@@ -2,9 +2,10 @@ const resData = require("../utils/apiRes");
 const { sequelize } = require("../config/db");
 const asyncWrapper = require("../utils/asyncWrapper");
 
-const { Users, UserInfo, StudentInfo, CompanyInfo } = require('../models/index')
+const { Users, UserInfo, StudentInfo, CompanyInfo } = require('../models')
 
 const findUser = async (email) => {
+
   let user = await Users.findOne({
     where: { email: email },
     attributes: { exclude: ["createdAt", "updatedAt"] },

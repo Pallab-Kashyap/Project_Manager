@@ -20,13 +20,19 @@ const TaskMember = sequelize.define('TaskMember', {
           onDelete: 'CASCADE',
         allowNull: false,
     },
+    user_id: {
+        type: DataTypes.BIGINT,
+        references: {
+            model: User, 
+            key: 'id'   
+          },
+          onDelete: 'CASCADE',
+        allowNull: false,
+    },
     position: {
         type: DataTypes.STRING,
         defaultValue: MEMBER_POSITION.MEMBER,
         allowNull: false,
-    },
-    task_completed: {
-        type: DataTypes.INTEGER,
     },
 },
 {

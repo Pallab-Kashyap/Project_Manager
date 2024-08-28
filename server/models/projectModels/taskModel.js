@@ -21,6 +21,15 @@ const Task = sequelize.define('Task', {
         type: DataTypes.BIGINT,
         allowNull: true,
     },
+    creator_id: {
+        type: DataTypes.BIGINT,
+        references: {
+            type: DataTypes.BIGINT,
+            key: 'id'
+        },
+        onDelete: 'CASCADE',
+        allowNull: false
+    },
     task_name: {
         type: DataTypes.STRING,
         allowNull: false,
