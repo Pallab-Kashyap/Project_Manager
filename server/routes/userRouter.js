@@ -1,12 +1,23 @@
-const Router = require('express');
-const { registerUserInfo, updatedUserInfo, getUserInfo } = require('../controllers/userController');
-const { auth } = require('../middleware/authMiddleware');
+const Router = require("express");
+const { auth } = require("../middleware/authMiddleware");
+const {
+  registerUserInfo,
+  updatedUserInfo,
+  getUserInfo,
+  getUserProject,
+  getUserTask,
+} = require("../controllers/userController");
 
 const router = Router();
 
-router.route('/')
-    .get(auth, getUserInfo)
-    .post(auth, registerUserInfo)
-    .put(auth, updatedUserInfo)
+router
+  .route("/")
+  .get(auth, getUserInfo)
+  .post(auth, registerUserInfo)
+  .put(auth, updatedUserInfo);
 
-module.exports = router
+router.route("/userProjects").get(auth, getUserProject);
+
+router.route("/userTasks").get(auth, getUserTask);
+
+module.exports = router;

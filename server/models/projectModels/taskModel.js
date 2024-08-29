@@ -11,10 +11,10 @@ const Task = sequelize.define('Task', {
     project_id: {
         type: DataTypes.BIGINT,
         references: {
-            model: Project, // Name of the model being referenced
-            key: 'id'       // Primary key in the UserInfo table
+            model: Project, 
+            key: 'id'       
           },
-          onDelete: 'CASCADE', // Optional: If a user is deleted, delete related student info
+          onDelete: 'CASCADE', 
         allowNull: false,
     },
     parent_id: {

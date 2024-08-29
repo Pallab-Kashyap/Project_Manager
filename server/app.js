@@ -5,8 +5,9 @@ const { Server } = require("socket.io");
 const { createServer } = require("http");
 const { connectDB } = require("./config/db");
 const cookieParser = require("cookie-parser");
-const userRouter = require("./routes/userRouter");
 const authRouter = require("./routes/authRouter");
+const userRouter = require("./routes/userRouter");
+const taskRouter = require('./routes/taskRouter');
 const errorHandle = require("./utils/errorHandle");
 const projectRouter = require("./routes/projectRouter");
 
@@ -31,6 +32,7 @@ app.use(cookieParser());
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/project", projectRouter);
+app.use("/api/v1/task", taskRouter)
 
 
 app.use(errorHandle);

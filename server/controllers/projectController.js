@@ -7,19 +7,27 @@ const { Project, ProjectMember, TaskMember, Users } = require("../models");
 const addMember = async (data, type, transaction) => {
   const { project_id, user_id, position } = data;
 
-  if (!project_id || !user_id || !position) {
-    res.status(400).json(resData(false, "userId and position required", null));
-    return null;
-  }
+  // if (!project_id || !user_id || !position) {
+  //   res.status(400).json(resData(false, "userId and position required", null));
+  //   return null;
+  // }
   let member = null;
   if (type === "project") {
     member = await ProjectMember.create(data, { transaction });
   } else if (type === "task") {
-    member = await TaskMember.create(data, { transaction });
-  }
+    // if(!(typeof(data.user_id) === object))
+    // member = await TaskMember.create(data, { transaction });
+    // else {
+    //   const taskMembers = data.user_id.map(user_id => ({
+    //     project_id,
+    //     position,
+    //     user_id
+    //   }));
 
-  return member;
-};
+      member = await TaskMember.bulkCreate(data, { transaction });
+    }
+    return member;
+  }
 
 const getAllProject = asyncWrapper( async (req, res, next) => {
   const user_id = req.userId
@@ -57,7 +65,7 @@ const createProject = asyncWrapper(async (req, res, next) => {
     start_date,
     end_date,
     leader_board,
-    project_status,
+    status,
     pack,
     membersList,
   } = req.body;
@@ -66,7 +74,7 @@ const createProject = asyncWrapper(async (req, res, next) => {
   req.user = undefined;
   req.userId = undefined;
 
-  if (!(project_name && start_date && end_date && project_status))
+  if (!(project_name && start_date && end_date && status))
     return res.status(400).json(resData(false, "all fields required", null));
 
   const transaction = await sequelize.transaction();
@@ -78,7 +86,7 @@ const createProject = asyncWrapper(async (req, res, next) => {
         project_name,
         start_date,
         end_date,
-        project_status
+        status
     }, { transaction });
 
     project = project.toJSON();

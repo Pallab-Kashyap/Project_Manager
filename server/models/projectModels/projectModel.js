@@ -38,7 +38,7 @@ const Project = sequelize.define('Project', {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
     },
-    project_status: {
+    status: {
         type: DataTypes.STRING,
         allowNull: true,
     },

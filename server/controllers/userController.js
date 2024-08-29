@@ -2,7 +2,7 @@ const resData = require("../utils/apiRes");
 const { sequelize } = require("../config/db");
 const asyncWrapper = require("../utils/asyncWrapper");
 
-const { Users, UserInfo, StudentInfo, CompanyInfo } = require('../models')
+const { Users, UserInfo, StudentInfo, CompanyInfo, Project, Task, TaskMember } = require('../models')
 
 const findUser = async (email) => {
 
@@ -190,9 +190,45 @@ const updatedUserInfo = asyncWrapper(async (req, res, next) => {
   res.status(200).json(resData(true, "user data updated", updatedUserData));
 });
 
+const getUserProject = asyncWrapper( async(req, res, next) => {
+  const creator_id = req.userId
+
+  const projects = await Project.findAll({
+    where: {creator_id}
+  })
+
+  if(!projects)
+    return res.status(500).json(resData(false, 'something went wrong'))
+
+  res.status(200).json(resData(true, 'success', projects))
+})
+
+const getUserTask = asyncWrapper( async (req, res, next) => {
+  const user_id = req.userId
+
+  const task = await Task.findAll({
+    include: [
+      {
+        model: TaskMember,
+        where: {user_id},
+        required: true,
+        attributes: []
+      },
+    ],
+    attributes: { exclude: ['updatedAt', 'createdAt'] }
+  })
+
+  if(!task) return res.status(500).json(resData(false, 'somthing went wrong', null))
+
+  res.status(200).json(resData(true, 'success', task))
+})
+
+
 module.exports = {
   findUser,
   registerUserInfo,
   updatedUserInfo,
   getUserInfo,
+  getUserProject,
+  getUserTask,
 };
