@@ -23,7 +23,7 @@ const Comment = sequelize.define('Comment', {
     creator_id: {
         type: DataTypes.BIGINT,
         references: {
-            model: Task, // Name of the model being referenced
+            model: User, // Name of the model being referenced
             key: 'id'       // Primary key in the UserInfo table
           },
           onDelete: 'CASCADE',

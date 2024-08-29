@@ -9,16 +9,7 @@ const Users = sequelize.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    first_name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notNull: {
-          msg: "all fields required",
-        },
-      },
-    },
-    last_name: {
+    user_name: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {

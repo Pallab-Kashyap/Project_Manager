@@ -35,8 +35,8 @@ Task.belongsTo(Project, { foreignKey: 'project_id' });
 Task.hasMany(Comment, { foreignKey: 'task_id' });
 Comment.belongsTo(Task, { foreignKey: 'task_id' });
 
-Users.hasMany(Comment, { foreignKey: 'task_id' });
-Comment.belongsTo(Users, { foreignKey: 'task_id' });
+Users.hasMany(Comment, { foreignKey: 'creator_id' });
+Comment.belongsTo(Users, { foreignKey: 'creator_id' });
 
 Task.hasMany(TaskMember, { foreignKey: 'task_id' });
 TaskMember.belongsTo(Task, { foreignKey: 'task_id' });

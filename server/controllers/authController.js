@@ -6,9 +6,10 @@ const { findUser } = require("./userController");
 const asyncWrapper = require("../utils/asyncWrapper");
 
 const registerUser = asyncWrapper(async (req, res, next) => {
-  const { first_name, last_name, email, password } = req.body;
+  
+  const { user_name, email, password } = req.body;
 
-  if (!first_name || !last_name || !email || !password)
+  if (!user_name || !email || !password)
     return res
       .status(400)
       .json({ status: false, message: "all fields required" });

@@ -5,25 +5,11 @@ const { MEMBER_POSITION } = require("../utils/constant");
 const { Project, ProjectMember, TaskMember, Users } = require("../models");
 
 const addMember = async (data, type, transaction) => {
-  const { project_id, user_id, position } = data;
 
-  // if (!project_id || !user_id || !position) {
-  //   res.status(400).json(resData(false, "userId and position required", null));
-  //   return null;
-  // }
   let member = null;
   if (type === "project") {
     member = await ProjectMember.create(data, { transaction });
   } else if (type === "task") {
-    // if(!(typeof(data.user_id) === object))
-    // member = await TaskMember.create(data, { transaction });
-    // else {
-    //   const taskMembers = data.user_id.map(user_id => ({
-    //     project_id,
-    //     position,
-    //     user_id
-    //   }));
-
       member = await TaskMember.bulkCreate(data, { transaction });
     }
     return member;
