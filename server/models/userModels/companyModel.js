@@ -8,7 +8,7 @@ const CompanyInfo = sequelize.define('CompanyInfo', {
       primaryKey: true,
       autoIncrement: true,
     },
-    user_info_id: {
+    userInfoId: {
       type: DataTypes.INTEGER,
         references: {
           model: UserInfo, // Name of the model being referenced
@@ -17,11 +17,11 @@ const CompanyInfo = sequelize.define('CompanyInfo', {
         onDelete: 'CASCADE', // Optional: If a user is deleted, delete related student info
         onUpdate: 'CASCADE'  // Optional: Update userId in student info when it's updated in the users table
       },
-  company_name: {
+  companyName: {
     type: DataTypes.STRING,
     allowNull: false
   },
-  company_size: {
+  companySize: {
     type: DataTypes.STRING,
     allowNull: false
   },

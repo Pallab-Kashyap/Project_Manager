@@ -4,41 +4,41 @@ const { TaskMember, Task } = require("../models");
 const { addMember } = require("./projectController");
 const asyncWrapper = require("../utils/asyncWrapper");
 
+//TODO : get sub task
 const getProjectTask = asyncWrapper(async (req, res, next) => {
-    const { project_id, parent_id } = req.body
-    const user_id = req.userId
+    const { projectId, parentId } = req.body
 
-    if(!parent_id && !project_id)
-        return res.status(400).json(resData(false, 'project_id or parent_id needed'))
-
-    let task = await Task.findAll({
-        where: {project_id}
+    if(!parentId && !projectId)
+        return res.status(400).json(resData(false, 'projectId or parentId needed'))
+    let task = []
+    if(!parentId){
+    task = await Task.findAll({
+        where: {projectId, parentId: null}
         })
-
-        console.log(task);
-    if(task.length > 0)
-      task = await task.toJSON()
-
+    }else{
+      task = await Task.findAll({
+        where: {projectId, parentId}
+      })
+    }
     res.status(200).json(resData(true, 'success', task))
 })
 
 const createTask = asyncWrapper(async (req, res, next) => {
 
   const {
-    project_id,
-    parent_id,
-    task_name,
-    start_date,
-    end_date,
+    projectId,
+    parentId,
+    taskName,
+    startDate,
+    endDate,
     status,
     priority,
     memberList,
   } = req.body;
 
-  const creator_id = req.userId
+  const creatorId = req.userId
 
-
-  if (!(task_name && project_id && start_date && end_date && status))
+  if (!(taskName && projectId && startDate && endDate && status))
     return res.status(400).json(resData(false, "all fields required", null));
 
   const transaction = await sequelize.transaction();
@@ -46,13 +46,13 @@ const createTask = asyncWrapper(async (req, res, next) => {
   try {
 
     let task = await Task.create({
-        creator_id,
-        project_id,
-        parent_id,
-        start_date,
-        end_date,
+        creatorId,
+        projectId,
+        parentId,
+        startDate,
+        endDate,
         status,
-        task_name,
+        taskName,
         priority
     }, { transaction });
 
@@ -63,11 +63,11 @@ const createTask = asyncWrapper(async (req, res, next) => {
       console.log(task);
         return res
                 .status(200)
-                .json(resData(true, `congrats ${task_name} created`, task));
+                .json(resData(true, `congrats ${taskName} created`, task));
   
 }
     else{
-        memberList.forEach(ele => {ele.task_id = task.id})
+        memberList.forEach(ele => {ele.taskId = task.id})
 
         const member = await addMember(memberList, "task", transaction);
     
@@ -80,7 +80,7 @@ const createTask = asyncWrapper(async (req, res, next) => {
     console.log('commited');
     res
       .status(200)
-      .json(resData(true, `congrats ${task_name} created`, task));
+      .json(resData(true, `congrats ${taskName} created`, task));
   } catch (err) {
     console.log(err);
     await transaction.rollback();
@@ -89,13 +89,13 @@ const createTask = asyncWrapper(async (req, res, next) => {
 });
 
 const updateTask = asyncWrapper( async(req, res, next) => {
-  const { task_id } = req.body
+  const { taskId } = req.body
   const data = req.body.data
 
   const updatedProjectDetails = await Task.update(
     data,
     {
-      where: {id: task_id},
+      where: {id: taskId},
       returning: true,
     }
   );
@@ -108,22 +108,22 @@ const updateTask = asyncWrapper( async(req, res, next) => {
 })
 
 const deleteTask = asyncWrapper( async(req, res, next) => {
-  const { task_id } = req.body
-  const creator_id = req.userId
+  const { taskId } = req.body
+  const creatorId = req.userId
 
-  let userId = await Task.findByPk( task_id, {
-    attributes: ["creator_id"]
+  let userId = await Task.findByPk( taskId, {
+    attributes: ["creatorId"]
   })
 
-  userId = await userId.toJSON().creator_id
+  userId = await userId.toJSON().creatorId
   
-  if(userId != creator_id)
+  if(userId != creatorId)
     res.status(401).json(resData(false, 'user is unauthorized to delete this project', null))
   else {
     await Task.destroy({
-      where: {id: task_id}
+      where: {id: taskId}
     })
-    .then(() => res.status(200).json(resData(true, `project ${task_id} deleted`, null)))
+    .then(() => res.status(200).json(resData(true, `project ${taskId} deleted`, null)))
     .catch(() => res.status(5000).json(resData(false, 'somthing went wrong', null)))
   }
 

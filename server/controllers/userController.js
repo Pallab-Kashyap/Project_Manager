@@ -2,11 +2,11 @@ const resData = require("../utils/apiRes");
 const { sequelize } = require("../config/db");
 const asyncWrapper = require("../utils/asyncWrapper");
 
-const { Users, UserInfo, StudentInfo, CompanyInfo, Project, Task, TaskMember } = require('../models')
+const { User, UserInfo, StudentInfo, CompanyInfo, Project, Task, TaskMember } = require('../models')
 
 const findUser = async (email) => {
 
-  let user = await Users.findOne({
+  let user = await User.findOne({
     where: { email: email },
     attributes: { exclude: ["createdAt", "updatedAt"] },
   });
@@ -20,10 +20,10 @@ const registerStudentInfo = async (req, res, next) => {
   const userId = req.userId;
 
   try {
-    const { occupation, institute_name, stream, year, domain, state, country } =
+    const { occupation, instituteName, stream, year, domain, state, country } =
       req.body;
 
-    if (!(institute_name && stream && year && domain && state && country))
+    if (!(instituteName && stream && year && domain && state && country))
       return res.status(400).json(resData(false, "all fields required", null));
 
     const userInfo = await UserInfo.create(
@@ -34,14 +34,14 @@ const registerStudentInfo = async (req, res, next) => {
       { transaction }
     );
 
-    const user_info_id = await userInfo.toJSON().id;
+    const userInfoId = await userInfo.toJSON().id;
 
-    console.log("userinfoid", user_info_id);
+    console.log("userinfoid", userInfoId);
 
     let result = await StudentInfo.create(
       {
-        user_info_id,
-        institute_name,
+        userInfoId,
+        instituteName,
         stream,
         year,
         domain,
@@ -70,15 +70,15 @@ const registerCompanyInfo = async (req, res, next) => {
   try {
     const {
       occupation,
-      company_name,
-      company_size,
+      companyName,
+      companySize,
       sector,
       website,
       state,
       country,
     } = req.body;
 
-    if (!(company_name && company_size && sector && state && country))
+    if (!(companyName && companySize && sector && state && country))
       return res.status(400).json(resData(false, "all fields required", null));
 
     const userInfo = await UserInfo.create(
@@ -89,13 +89,13 @@ const registerCompanyInfo = async (req, res, next) => {
       { transaction }
     );
 
-    const user_info_id = await userInfo.toJSON().id;
+    const userInfoId = await userInfo.toJSON().id;
     console.log("com");
     let result = await CompanyInfo.create(
       {
-        user_info_id,
-        company_name,
-        company_size,
+        userInfoId,
+        companyName,
+        companySize,
         sector,
         website,
         state,
@@ -181,7 +181,7 @@ const updatedUserInfo = asyncWrapper(async (req, res, next) => {
   req.body.id = data.id;
 
   let updatedUserData = await table.update(req.body, {
-    where: { user_info_id: data.id },
+    where: { userInfoId: data.id },
     returning: true,
   });
 
@@ -191,10 +191,10 @@ const updatedUserInfo = asyncWrapper(async (req, res, next) => {
 });
 
 const getUserProject = asyncWrapper( async(req, res, next) => {
-  const creator_id = req.userId
+  const creatorId = req.userId
 
   const projects = await Project.findAll({
-    where: {creator_id}
+    where: {creatorId}
   })
 
   if(!projects)
@@ -204,13 +204,13 @@ const getUserProject = asyncWrapper( async(req, res, next) => {
 })
 
 const getUserTask = asyncWrapper( async (req, res, next) => {
-  const user_id = req.userId
+  const userId = req.userId
 
   const task = await Task.findAll({
     include: [
       {
         model: TaskMember,
-        where: {user_id},
+        where: {userId},
         required: true,
         attributes: []
       },

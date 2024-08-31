@@ -8,7 +8,7 @@ const StudentInfo = sequelize.define('StudentInfo', {
       primaryKey: true,
       autoIncrement: true,
     },
-    user_info_id: {
+    userInfoId: {
       type: DataTypes.INTEGER,
         references: {
           model: UserInfo, // Name of the model being referenced
@@ -17,7 +17,7 @@ const StudentInfo = sequelize.define('StudentInfo', {
         onDelete: 'CASCADE', // Optional: If a user is deleted, delete related student info
         onUpdate: 'CASCADE'  // Optional: Update userId in student info when it's updated in the users table
       },
-  institute_name: {
+  instituteName: {
     type: DataTypes.STRING,
     allowNull: false
   },

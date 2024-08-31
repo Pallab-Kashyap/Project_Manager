@@ -5,11 +5,11 @@ const { MEMBER_POSITION } = require("../utils/constant")
 
 const taskAuth = asyncWrapper( async (req, res, next) =>{
 
-    const { task_id } = req.body
-    const user_id = req.userId
+    const { taskId } = req.body
+    const userId = req.userId
 
     let userPosition = await TaskMember.findOne({
-        where: {task_id,user_id},
+        where: {taskId,userId},
         attributes: ["position"]
     })
 

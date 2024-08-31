@@ -8,7 +8,7 @@ const Task = sequelize.define('Task', {
         autoIncrement: true,
         primaryKey: true,
     },
-    project_id: {
+    projectId: {
         type: DataTypes.BIGINT,
         references: {
             model: Project, 
@@ -17,11 +17,11 @@ const Task = sequelize.define('Task', {
           onDelete: 'CASCADE', 
         allowNull: false,
     },
-    parent_id: {
+    parentId: {
         type: DataTypes.BIGINT,
         allowNull: true,
     },
-    creator_id: {
+    creatorId: {
         type: DataTypes.BIGINT,
         references: {
             type: DataTypes.BIGINT,
@@ -30,19 +30,19 @@ const Task = sequelize.define('Task', {
         onDelete: 'CASCADE',
         allowNull: false
     },
-    task_name: {
+    taskName: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    start_date: {
+    startDate: {
         type: DataTypes.DATE,
         allowNull: true,
     },
-    end_date: {
+    endDate: {
         type: DataTypes.DATE,
         allowNull: true,
     },
-    task_visibility: {
+    visibility: {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
     },

@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require("../../config/db");
-const User = require('../userModels/usersModel');
+const User = require('../userModels/userModel');
 
 
 const ProjectTier = sequelize.define('ProjectTier', {
@@ -26,7 +26,7 @@ const ProjectTier = sequelize.define('ProjectTier', {
         type: DataTypes.TEXT,
         allowNull: true,
     },
-    start_date: {
+    startDate: {
         type: DataTypes.DATE,
         allowNull: true,
     },

@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require("../../config/db");
-const User = require('../userModels/usersModel');
+const User = require('../userModels/userModel');
 
 
 const Project = sequelize.define('Project', {
@@ -9,11 +9,11 @@ const Project = sequelize.define('Project', {
         autoIncrement: true,
         primaryKey: true,
     },
-    project_name: {
+    projectName: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    creator_id: {
+    creatorId: {
         type: DataTypes.BIGINT,
         references: {
             model: User, // Name of the model being referenced
@@ -26,15 +26,15 @@ const Project = sequelize.define('Project', {
         type: DataTypes.TEXT,
         allowNull: true,
     },
-    start_date: {
+    startDate: {
         type: DataTypes.DATE,
         allowNull: true,
     },
-    end_date: {
+    endDate: {
         type: DataTypes.DATE,
         allowNull: true,
     },
-    leader_board: {
+    leaderboard: {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
     },

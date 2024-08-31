@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require("../../config/db");
-const User = require('../userModels/usersModel');
+const User = require('../userModels/userModel');
 const { MEMBER_POSITION } = require('../../utils/constant');
 const Project = require('./projectModel');
 
@@ -10,7 +10,7 @@ const ProjectMember = sequelize.define('ProjectMember', {
         autoIncrement: true,
         primaryKey: true,
     },
-    project_id: {
+    projectId: {
         type: DataTypes.BIGINT,
         references: {
             model: Project, 
@@ -19,7 +19,7 @@ const ProjectMember = sequelize.define('ProjectMember', {
           onDelete: 'CASCADE',
         allowNull: false,
     },
-    user_id: {
+    userId: {
         type: DataTypes.BIGINT,
         references: {
             model: User, 
@@ -37,7 +37,7 @@ const ProjectMember = sequelize.define('ProjectMember', {
         type: DataTypes.BOOLEAN,
         // defaultValue: false,
     },
-    task_completed: {
+    completedTaks: {
         type: DataTypes.INTEGER,
     }
 },

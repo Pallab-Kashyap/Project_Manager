@@ -2,7 +2,7 @@ const resData = require("../utils/apiRes");
 const { sequelize } = require("../config/db");
 const asyncWrapper = require("../utils/asyncWrapper");
 const { MEMBER_POSITION } = require("../utils/constant");
-const { Project, ProjectMember, TaskMember, Users } = require("../models");
+const { Project, ProjectMember, TaskMember } = require("../models");
 
 const addMember = async (data, type, transaction) => {
 
@@ -16,24 +16,21 @@ const addMember = async (data, type, transaction) => {
   }
 
 const getAllProject = asyncWrapper( async (req, res, next) => {
-  const user_id = req.userId
+  const userId = req.userId
+  console.log(userId);
 
   const projects = await Project.findAll({
     include: [
       {
         model: ProjectMember,
-        where: {user_id},
+        where: {userId},
         required: true,
         attributes: []
       },
-      {
-        model: Users,
-        as: 'creator',
-        attributes: ['first_name', 'last_name']
-      }
     ],
     attributes: { exclude: ['updatedAt', 'createdAt'] }
   })
+  console.log(projects);
 
   if(!projects) return res.status(500).json(resData(false, 'somthing went wrong', null))
 
@@ -46,40 +43,40 @@ const getAllProject = asyncWrapper( async (req, res, next) => {
 
 const createProject = asyncWrapper(async (req, res, next) => {
   const {
-    project_name,
+    projectName,
     description,
-    start_date,
-    end_date,
-    leader_board,
+    startDate,
+    endDate,
+    leaderboard,
     status,
     pack,
     membersList,
   } = req.body;
 
-  req.creator_id = req.userId;
+  req.creatorId = req.userId;
   req.user = undefined;
   req.userId = undefined;
 
-  if (!(project_name && start_date && end_date && status))
+  if (!(projectName && startDate && endDate && status))
     return res.status(400).json(resData(false, "all fields required", null));
 
   const transaction = await sequelize.transaction();
 
   try {
-    console.log(req.creator_id)
+    console.log(req.creatorId)
     let project = await Project.create({
-        creator_id : req.creator_id,
-        project_name,
-        start_date,
-        end_date,
+        creatorId : req.creatorId,
+        projectName,
+        startDate,
+        endDate,
         status
     }, { transaction });
 
     project = project.toJSON();
 
     const data = {
-      project_id: project.id,
-      user_id: req.creator_id,
+      projectId: project.id,
+      userId: req.creatorId,
       position: MEMBER_POSITION.PROJECT_LEAD,
     };
 
@@ -90,7 +87,7 @@ const createProject = asyncWrapper(async (req, res, next) => {
     await transaction.commit();
     res
       .status(200)
-      .json(resData(true, `congrats ${project_name} created`, project));
+      .json(resData(true, `congrats ${projectName} created`, project));
   } catch (err) {
     console.log(err);
     await transaction.rollback();
@@ -99,18 +96,17 @@ const createProject = asyncWrapper(async (req, res, next) => {
 });
 
 const updateProject = asyncWrapper( async(req, res, next) => {
-  const { project_id } = req.body
+  const { projectId } = req.body
   const data = req.body.data
 
   const updatedProjectDetails = await Project.update(
     data,
     {
-      where: {id: project_id},
+      where: {id: projectId},
       returning: true,
     }
   );
-
-  if(!updatedProjectDetails)
+  if(updatedProjectDetails[0] === 0)
     res.status(500).json(resData(false, 'internal server error', null))
   
   res.status(200).json(resData(true, 'project details updated', updatedProjectDetails[1]))
@@ -118,22 +114,22 @@ const updateProject = asyncWrapper( async(req, res, next) => {
 })
 
 const deleteProject = asyncWrapper( async(req, res, next) => {
-  const {project_id } = req.body
-  const creator_id = req.userId
+  const {projectId } = req.body
+  const creatorId = req.userId
 
-  let userId = await Project.findByPk( project_id, {
-    attributes: ["creator_id"]
+  let userId = await Project.findByPk( projectId, {
+    attributes: ["creatorId"]
   })
 
-  userId = await userId.toJSON().creator_id
+  userId = await userId.toJSON().creatorId
   
-  if(userId != creator_id)
+  if(userId != creatorId)
     res.status(401).json(resData(false, 'user is unauthorized to delete this project', null))
   else {
     await Project.destroy({
-      where: {id: project_id}
+      where: {id: projectId}
     })
-    .then(() => res.status(200).json(resData(true, `project ${project_id} deleted`, null)))
+    .then(() => res.status(200).json(resData(true, `project ${projectId} deleted`, null)))
     .catch(() => res.status(5000).json(resData(false, 'somthing went wrong', null)))
   }
 

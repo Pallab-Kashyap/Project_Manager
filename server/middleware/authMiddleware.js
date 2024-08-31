@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken");
 const resData = require("../utils/apiRes");
 const asyncWrapper = require("../utils/asyncWrapper");
-const Users = require("../models/userModels/usersModel");
 const { findUser } = require("../controllers/userController");
 
 const auth = asyncWrapper(async (req, res, next) => {

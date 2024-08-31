@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require("../../config/db");
-const User = require('../userModels/usersModel');
+const User = require('../userModels/userModel');
 const { MEMBER_POSITION } = require('../../utils/constant');
 const Task = require('./taskModel');
 
@@ -10,7 +10,7 @@ const Comment = sequelize.define('Comment', {
         autoIncrement: true,
         primaryKey: true,
     },
-    task_id: {
+    taskId: {
         type: DataTypes.BIGINT,
         type: DataTypes.BIGINT,
         references: {
@@ -20,7 +20,7 @@ const Comment = sequelize.define('Comment', {
           onDelete: 'CASCADE',
         allowNull: false,
     },
-    creator_id: {
+    creatorId: {
         type: DataTypes.BIGINT,
         references: {
             model: User, // Name of the model being referenced

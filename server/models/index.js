@@ -1,5 +1,5 @@
 const { sequelize } = require('../config/db')
-const Users = require('./userModels/usersModel');
+const User = require('./userModels/userModel');
 const Task = require('./projectModels/taskModel');
 const UserInfo = require('./userModels/userInfoModel');
 const Comment = require('./projectModels/commentModel');
@@ -11,50 +11,50 @@ const ProjectMember = require('./projectModels/projectMemberModel');
 
 const sycnDB = async() => {
 
-Users.hasOne(UserInfo, {foreignKey: "userId"})
-UserInfo.belongsTo(Users, {foreignKey: "userId"})
+User.hasOne(UserInfo, {foreignKey: "userId"})
+UserInfo.belongsTo(User, {foreignKey: "userId"})
 
-UserInfo.hasOne(StudentInfo, { foreignKey: 'user_info_id' });
-StudentInfo.belongsTo(UserInfo, { foreignKey: 'user_info_id' });
+UserInfo.hasOne(StudentInfo, { foreignKey: 'userInfoId' });
+StudentInfo.belongsTo(UserInfo, { foreignKey: 'userInfoId' });
 
-UserInfo.hasOne(CompanyInfo, { foreignKey: 'user_info_id' });
-CompanyInfo.belongsTo(UserInfo, { foreignKey: 'user_info_id' });
+UserInfo.hasOne(CompanyInfo, { foreignKey: 'userInfoId' });
+CompanyInfo.belongsTo(UserInfo, { foreignKey: 'userInfoId' });
 
-Users.hasMany(Project, { foreignKey: 'creator_id' });
-Project.belongsTo(Users, { as: 'creator', foreignKey: 'creator_id' });
+User.hasMany(Project, { foreignKey: 'creatorId' });
+Project.belongsTo(User, { as: 'creator', foreignKey: 'creatorId' });
 
-Users.hasMany(ProjectMember, { foreignKey: 'user_id' });
-ProjectMember.belongsTo(Users, { foreignKey: 'user_id' });
+User.hasMany(ProjectMember, { foreignKey: 'userId' });
+ProjectMember.belongsTo(User, { foreignKey: 'userId' });
 
-Project.hasMany(ProjectMember, { foreignKey: 'project_id' });
-ProjectMember.belongsTo(Project, { foreignKey: 'project_id' });
+Project.hasMany(ProjectMember, { foreignKey: 'projectId' });
+ProjectMember.belongsTo(Project, { foreignKey: 'projectId' });
 
-Project.hasMany(Task, { foreignKey: 'project_id' });
-Task.belongsTo(Project, { foreignKey: 'project_id' });
+Project.hasMany(Task, { foreignKey: 'projectId' });
+Task.belongsTo(Project, { foreignKey: 'projectId' });
 
-Task.hasMany(Comment, { foreignKey: 'task_id' });
-Comment.belongsTo(Task, { foreignKey: 'task_id' });
+Task.hasMany(Comment, { foreignKey: 'taskId' });
+Comment.belongsTo(Task, { foreignKey: 'taskId' });
 
-Users.hasMany(Comment, { foreignKey: 'creator_id' });
-Comment.belongsTo(Users, { foreignKey: 'creator_id' });
+User.hasMany(Comment, { foreignKey: 'creatorId' });
+Comment.belongsTo(User, { foreignKey: 'creatorId' });
 
-Task.hasMany(TaskMember, { foreignKey: 'task_id' });
-TaskMember.belongsTo(Task, { foreignKey: 'task_id' });
+Task.hasMany(TaskMember, { foreignKey: 'taskId' });
+TaskMember.belongsTo(Task, { foreignKey: 'taskId' });
 
-Users.hasMany(Task, {foreignKey: 'creator_id'})
-Task.belongsTo(Users, {as: 'creator', foreignKey: 'creator_id'})
+User.hasMany(Task, {foreignKey: 'creatorId'})
+Task.belongsTo(User, {as: 'creator', foreignKey: 'creatorId'})
 
-Users.hasMany(TaskMember, { foreignKey: 'user_id' });
-TaskMember.belongsTo(Users, { foreignKey: 'user_id' });
+User.hasMany(TaskMember, { foreignKey: 'userId' });
+TaskMember.belongsTo(User, { foreignKey: 'userId' });
 
-Task.belongsTo(Task, { as: 'parent', foreignKey: 'parent_id', onDelete: 'CASCADE' });
+Task.belongsTo(Task, { as: 'parent', foreignKey: 'parentId', onDelete: 'CASCADE' });
 
 await sequelize.sync({ alter: true })
 
 }
 
 module.exports = {
-    Users,
+    User,
     UserInfo,
     StudentInfo,
     CompanyInfo,

@@ -3,11 +3,11 @@ const resData = require("../utils/apiRes")
 const { MEMBER_POSITION } = require("../utils/constant")
 
 const projectAuth = async(req, res, next) => {
-    const { project_id } = req.body
-    const user_id = req.userId
+    const { projectId } = req.body
+    const userId = req.userId
 
         let userPosition = await ProjectMember.findOne({
-            where: {project_id,user_id},
+            where: {projectId,userId},
             attributes: ["position"]
         })
 

@@ -1,15 +1,15 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { Users } = require("../models");
+const { User } = require("../models");
 const resData = require("../utils/apiRes");
 const { findUser } = require("./userController");
 const asyncWrapper = require("../utils/asyncWrapper");
 
 const registerUser = asyncWrapper(async (req, res, next) => {
   
-  const { user_name, email, password } = req.body;
+  const { userName, email, password } = req.body;
 
-  if (!user_name || !email || !password)
+  if (!userName || !email || !password)
     return res
       .status(400)
       .json({ status: false, message: "all fields required" });
@@ -24,7 +24,7 @@ const registerUser = asyncWrapper(async (req, res, next) => {
 
   req.body.password = hashedPassword;
 
-  user = await Users.create(req.body);
+  user = await User.create(req.body);
   if (!user)
     return res.status(500).json(resData(false, "something went wrong", null));
 
