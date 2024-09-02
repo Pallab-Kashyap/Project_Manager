@@ -1,0 +1,32 @@
+*{
+    transition: all 0.3 ease;
+}
+
+.icons {
+
+  border: 10px solid transparent; /* Create a space for the gradient */
+  background: linear-gradient(135deg, #4caf50, #00d4ff); /* Background gradient */
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+/* .prnt{
+    background: linear-gradient(45deg, #ff6b6b, #f4d03f, #45b6fe);
+    -webkit-background-clip: text;
+    background-clip: text; /* Make the text transparent */
+/* } */ */
+.icon {
+    /* display: inline-block; */
+    background: linear-gradient(45deg, #ff6b6b, #f4d03f, #45b6fe);
+    -webkit-background-clip: text;
+    background-clip: text; /* Make the text transparent */
+     /* Make the text transparent */
+     color: transparent;
+    
+  }
+
+  .Notifications > img{
+    height: 38px;
+    width: 38px;
+  }
