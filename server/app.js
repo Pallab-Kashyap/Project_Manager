@@ -44,6 +44,11 @@ app.get("/api/v1", (req, res) => {
   res.json({m : 'fie'})
   console.log('sent');
 })
+app.post("/api/v1", (req, res) => {
+  console.log('got rea');
+  res.json({m : 'fie'})
+  console.log('sent');
+})
 
 
 app.use(errorHandle);

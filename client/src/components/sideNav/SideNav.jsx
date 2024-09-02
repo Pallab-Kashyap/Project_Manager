@@ -7,9 +7,10 @@ import { GrTask } from "react-icons/gr";
 import { IoMdLogOut } from "react-icons/io";
 import { RiContactsFill } from "react-icons/ri";
 import './sideNav.css'
+import '../../App.css'
 import { chatIcon, contactIcon, dashboardIcon, notifyIcon, taskIcon, logoutIcon } from '../../assets/icons/'
 
-function SideNav() {
+function SideNav({setIsHovered}) {
     const sideNavItems =[]
     const list = [
         {
@@ -34,11 +35,14 @@ function SideNav() {
     },
 ]
     return (
-        <div className='h-fit w-fit py-8 px-2 fixed top-40 rounded-xl overflow-hidden'>
-            <ul className='group px-6 py-3 flex flex-col gap-10'>
-            <li>
+        <div className=' sidenav h-fit w-fit py-6 px- fixed top-40 rounded-xl overflow-hidden text-white'>
+            <ul className='group px-4 py-1 flex flex-col gap-6'
+                onMouseEnter={()=>setIsHovered(true)}
+                onMouseLeave={()=>setIsHovered(false)}
+            >
+            <li className='hover:bg-gray-400 hover:bg-opacity-25 p-2 pl-3 pr-16 rounded-full'>
                     <Link to='/'
-                        className='flex gap-3 items-center'
+                        className='flex gap-4 items-center'
                     >
                     
                         <div className='text-3xl '>
@@ -50,10 +54,10 @@ function SideNav() {
                     </Link>
                 </li>
                 { list && list.map((item, index) => (
-                <li key={index}>
+                <li key={index} className='hover:bg-gray-400 hover:bg-opacity-25 p-2 pl-3 pr-16 rounded-full'>
                     <Link to='/'
                         
-                        className='flex gap-5 items-center'
+                        className='flex gap-6 items-center'
                     >
                         <div className={`text-3xl ${item.name}`}>
                             <img src={item.icon} alt="" />

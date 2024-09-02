@@ -5,7 +5,7 @@ import { Link, NavLink } from "react-router-dom";
 
 function TopNav() {
   return (
-    <div className="bg-neutral-600 h-fit w-full flex justify-between">
+    <div className="bg-neutral-600 h-fit  flex justify-between">
       <div className="LOGO flex p-4 ml-5">
         <div className="h-10 w-10">
           <img src={user} alt="" />
@@ -34,7 +34,7 @@ function TopNav() {
       </div>
       <div className="flex">
         <div className="feedback flex gap-3 mr-4 items-center">
-          <Button classname="bg-blue-500" text="feedback" />
+          <Button classname="bg-blue-500 hover:bg-blue-600" text="feedback" />
           <Button classname="bg-black px-6" text="help" />
         </div>
         <div className="userLogo text-white h-10 w-10 m-4 mr-8">

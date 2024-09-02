@@ -6,8 +6,8 @@ const { findUser } = require("./userController");
 const asyncWrapper = require("../utils/asyncWrapper");
 
 const registerUser = asyncWrapper(async (req, res, next) => {
-  
-  const { userName, email, password } = req.body;
+
+  const { userName, email, password } = req.body;  
 
   if (!userName || !email || !password)
     return res
@@ -27,9 +27,11 @@ const registerUser = asyncWrapper(async (req, res, next) => {
   user = await User.create(req.body);
   if (!user)
     return res.status(500).json(resData(false, "something went wrong", null));
-
+  
   user = user.toJSON();
   user.password = undefined;
+  user.createdAt = undefined
+  user.updatedAt = undefined
 
   const payload = {
     userId: user.id,

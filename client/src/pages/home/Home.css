@@ -1,0 +1,19 @@
+.sideNavContainer.hovered {
+    background: rgba(255, 255, 255, 0.2); 
+    border-radius: 15px;
+    /* padding: 30px; */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    /* backdrop-filter: blur(10px);  */
+    /* -webkit-backdrop-filter: blur(10px);  */
+    /* border: 1px solid rgba(255, 255, 255, 0.3);  */
+    /* color: white; */
+    /* text-align: center; */
+    width: 288px;
+  }
+
+  .createPrjt {
+    /* background: rgb(0,255,153); */
+    /* background: linear-gradient(121deg, rgba(0,255,153,1) 10%, rgba(21,150,120,1) 44%, rgba(0,130,193,1) 74%); */
+    background: rgb(0,255,119);
+background: linear-gradient(121deg, rgba(0,255,119,1) 15%, rgba(28,153,154,1) 50%, rgba(24,162,229,1) 88%);
+  }
