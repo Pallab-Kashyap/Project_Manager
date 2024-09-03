@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { IoIosTimer } from "react-icons/io";
 
 
@@ -11,41 +11,45 @@ function TimeBar({info}) {
     let width = ''
     let color = 'text-green-500'
     let bg = 'bg-green-500'
-    let icon = <IoIosTimer />
-    // console.log(endDate, now, endDate > now);
+
+
+    const calsTime = () => {
+      let remainingTime = endDate - now;
+      // console.log(remainingTime);
+    
+
+      const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      // console.log(days, hours);
+      if(days > 0){
+           remaining = `${days}d`
+      }else{
+           remaining = ` ${hours}h`
+      }
+
+      // console.log(endDate);
+      // console.log(startedDate);
+
+       const totalTime = (endDate - startedDate) / (1000 * 60 * 60); 
+     
+      //   remainingTime = (endDate - now) / (1000 * 60 * 60); 
+        remainingTime = (endDate - now) / (1000 * 60 * 60); 
+        console.log(endDate);
+        console.log(startedDate);
+        console.log(now);
+   console.log(remainingTime);
+   console.log(totalTime);
+
+      const remainingPercentage = (remainingTime / totalTime) * 100;
+      width = `${remainingPercentage}%`
+      
+      // console.log(width);
+      return remainingPercentage
+    }
+
     if(endDate > now){
         // console.log(endDate, now);
-
-            let remainingTime = endDate - now;
-            // console.log(remainingTime);
-          
-
-            const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            // console.log(days, hours);
-            if(days > 0){
-                 remaining = `${days}d`
-            }else{
-                 remaining = ` ${hours}h`
-            }
-
-            // console.log(endDate);
-            // console.log(startedDate);
-
-             const totalTime = (endDate - startedDate) / (1000 * 60 * 60); 
-           
-            //   remainingTime = (endDate - now) / (1000 * 60 * 60); 
-              remainingTime = (endDate - now) / (1000 * 60 * 60); 
-        //  console.log(remainingTime);
-        //  console.log(totalTime);
-
-            const remainingPercentage = (remainingTime / totalTime) * 100;
-            width = `${remainingPercentage}%`
-            // console.log(width);
-
-
-
-     
+        let remainingPercentage = calsTime()
              if (remainingPercentage < 25) {
                color = 'text-red-500';
                bg = 'bg-red-500';
@@ -62,7 +66,7 @@ function TimeBar({info}) {
           }
           else{
             return (
-                <div>time up</div>
+                width = '0%'
             )
           }
         
