@@ -10,7 +10,7 @@ import './sideNav.css'
 import '../../App.css'
 import { chatIcon, contactIcon, dashboardIcon, notifyIcon, taskIcon, logoutIcon } from '../../assets/icons/'
 
-function SideNav({setIsHovered}) {
+function SideNav({setIsHovered, isActive}) {
     const sideNavItems =[]
     const list = [
         {
@@ -35,7 +35,7 @@ function SideNav({setIsHovered}) {
     },
 ]
     return (
-        <div className=' sidenav h-fit w-fit py-6 px- fixed top-40 rounded-xl overflow-hidden text-white'>
+        <div className={`sidenav h-fit w-fit py-6 px- fixed top-40 rounded-xl overflow-hidden  text-white `}>
             <ul className='group px-4 py-1 flex flex-col gap-6'
                 onMouseEnter={()=>setIsHovered(true)}
                 onMouseLeave={()=>setIsHovered(false)}
