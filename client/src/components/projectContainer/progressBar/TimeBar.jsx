@@ -15,7 +15,7 @@ function TimeBar({info}) {
 
     const calsTime = () => {
       let remainingTime = endDate - now;
-      // console.log(remainingTime);
+      // .log(remainingTime);
     
 
       const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
@@ -34,11 +34,11 @@ function TimeBar({info}) {
      
       //   remainingTime = (endDate - now) / (1000 * 60 * 60); 
         remainingTime = (endDate - now) / (1000 * 60 * 60); 
-        console.log(endDate);
-        console.log(startedDate);
-        console.log(now);
-   console.log(remainingTime);
-   console.log(totalTime);
+  //       console.log(endDate);
+  //       console.log(startedDate);
+  //       console.log(now);
+  //  console.log(remainingTime);
+  //  console.log(totalTime);
 
       const remainingPercentage = (remainingTime / totalTime) * 100;
       width = `${remainingPercentage}%`
@@ -65,9 +65,8 @@ function TimeBar({info}) {
              }
           }
           else{
-            return (
-                width = '0%'
-            )
+            width = '0%'
+            color = 'text-red-500'
           }
         
 

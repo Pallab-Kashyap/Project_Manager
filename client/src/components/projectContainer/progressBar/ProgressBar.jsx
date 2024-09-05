@@ -45,7 +45,7 @@ function ProgressBar({info}) {
                 {icon}
             </div>
             <div className='w-full mt-[1px] p-1 border-2 border-gray-500 rounded-full '>
-              <div className={`${bg} h-2  rounded-full ${percentage === 100 ? 'completed' : ''}`} style={{width}}></div>
+              <div className={`${bg} h-2 sm:mt-[0.2px]  rounded-full ${percentage === 100 ? 'completed' : ''}`} style={{width}}></div>
             </div>
             </div>
             <div className='text-center mt-3 hidden group-hover:block text-slate-400'>{percentage === 100 ? 'completed 🎉' : `Task: ${info.completed}/${info.total}`}</div>

@@ -11,7 +11,7 @@
     width: 288px;
   }
 
-  .createPrjt {
+  .createProjectBtn {
     background-image: linear-gradient(
       55deg,
       hsl(127deg 91% 46%) 0%,
@@ -42,3 +42,111 @@
 /* background: linear-gradient(121deg, rgba(0,255,119,1) 15%, rgba(28,153,154,1) 50%, rgba(24,162,229,1) 88%); */
   /* } */ 
 
+
+.activeCreateProjectBtn{
+  animation: moveButton 1.195s ease-in-out ;
+}
+
+/* @keyframes moveButton {
+  0% {
+    top: 208px;
+    right: 128px;
+    background-image: linear-gradient(
+      55deg,
+      hsl(127deg 91% 46%) 0%,
+      hsl(134deg 99% 44%) 5%,
+      hsl(138deg 100% 43%) 11%,
+      hsl(141deg 100% 42%) 16%,
+      hsl(143deg 99% 42%) 21%,
+      hsl(144deg 91% 43%) 26%,
+      hsl(145deg 82% 44%) 31%,
+      hsl(146deg 75% 45%) 36%,
+      hsl(147deg 69% 46%) 41%,
+      hsl(148deg 63% 47%) 46%,
+      hsl(162deg 100% 38%) 51%,
+      hsl(168deg 100% 38%) 57%,
+      hsl(173deg 100% 38%) 62%,
+      hsl(179deg 100% 37%) 68%,
+      hsl(184deg 100% 39%) 74%,
+      hsl(187deg 100% 41%) 80%,
+      hsl(190deg 100% 42%) 86%,
+      hsl(192deg 100% 43%) 93%,
+      hsl(196deg 78% 48%) 100%
+    );
+  } 
+
+  100% {
+    top: 80%;
+    right: 39.1%; 
+    transform: translateX(-50%); 
+    background-image: none;
+  }
+} */
+
+@keyframes moveButton {
+  0% {
+    top: 208px;
+    right: 128px;
+    background-image: linear-gradient(
+      55deg,
+      hsl(127deg 91% 46%) 0%,
+      hsl(196deg 78% 48%) 100%
+    );
+    backdrop-filter: none;
+    background-color: transparent;
+  }
+
+  25% {
+    background-image: linear-gradient(
+      55deg,
+      hsl(127, 42%, 59%) 0%,
+      hsl(180, 37%, 51%) 100%
+    );
+    backdrop-filter: none;
+    background-color: transparent;
+  }
+
+  50% {
+    background-image: linear-gradient(
+      55deg,
+      hsl(127, 18%, 51%) 0%,
+      hsl(159, 22%, 52%) 100%
+    );
+    backdrop-filter: none;
+    background-color: transparent;
+  }
+
+  62%{
+    background-image: linear-gradient(
+      55deg,
+      hsl(127, 4%, 48%) 0%,
+      hsla(150, 5%, 42%, 0.756) 100%
+    );
+    backdrop-filter: none;
+    background-color: transparent;
+  }
+
+  75% {
+    background-image: linear-gradient(
+      55deg,
+      hsl(129, 6%, 44%) 0%,
+      hsla(143, 7%, 39%, 0.852) 100%
+    );
+    backdrop-filter: none;
+    background-color: transparent;
+  }
+
+  90% {
+    background-image: none;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px); 
+  }
+
+  100% {
+    top: 80%;
+    right: 39.1%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.05); 
+    backdrop-filter: blur(4px); 
+  }
+}

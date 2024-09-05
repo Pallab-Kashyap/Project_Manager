@@ -24,8 +24,8 @@ function ProjectContainer() {
         creatorName: 'creator one',
         creatorId: 1,
         startDate: new Date(2024, 7, 21),
-        endDate: new Date('Thur Sep 04 2024 16:48:04 GMT+0530'),
-        status: 'In Progress',
+        endDate: new Date(2024, 9, 15),
+        status: 'On Hold',
         totalTask: 10,
         completedTask: 4,
     },
@@ -35,8 +35,8 @@ function ProjectContainer() {
         creatorName: 'creator one',
         creatorId: 1,
         startDate: new Date(2024, 7, 21),
-        endDate: new Date('Thur Sep 04 2024 16:48:04 GMT+0530'),
-        status: 'In Progress',
+        endDate: new Date(2024, 11, 13),
+        status: 'Not Started',
         totalTask: 10,
         completedTask: 4,
     },
@@ -57,6 +57,39 @@ function ProjectContainer() {
         creatorName: 'creator one',
         creatorId: 1,
         startDate: new Date(2024, 7, 21),
+        endDate: new Date(2024, 9, 5),
+        status: 'In Progress',
+        totalTask: 10,
+        completedTask: 4,
+    },
+    {
+        id: 6,
+        projectName: 'Project One',
+        creatorName: 'creator one',
+        creatorId: 1,
+        startDate: new Date(2024, 7, 21),
+        endDate: new Date(2024, 11, 1),
+        status: 'In Progress',
+        totalTask: 10,
+        completedTask: 4,
+    },
+    {
+        id: 7,
+        projectName: 'Project One',
+        creatorName: 'creator one',
+        creatorId: 1,
+        startDate: new Date(2024, 7, 21),
+        endDate: new Date('Thur Sep 04 2024 16:48:04 GMT+0530'),
+        status: 'In Progress',
+        totalTask: 10,
+        completedTask: 4,
+    },
+    {
+        id: 8,
+        projectName: 'Project One',
+        creatorName: 'creator one',
+        creatorId: 1,
+        startDate: new Date(2024, 7, 21),
         endDate: new Date('Thur Sep 04 2024 16:48:04 GMT+0530'),
         status: 'In Progress',
         totalTask: 10,
@@ -65,11 +98,12 @@ function ProjectContainer() {
 ]
 
     return (
-        <Link to='/' 
-        className='h-full '>
-            {
-                projectList.map((project) => (
-                    <div className='bg-[#26262A] p-5 mb-3 rounded-3xl sm:grid grid-cols-5' key={project.id}>
+        <>
+        {
+            projectList.map((project) => (
+        <Link to='/' key={project.id}
+        className='h-full'>
+                    <div className='bg-[#2a2a349a] border-2 border-gray-700 shadow-md shadow-white/15 p-5 mb-3 rounded-3xl sm:grid grid-cols-5' key={project.id}>
                         <div className='text-white '>
                             <h1 className=' text-xl sm:text-4xl'>{project.projectName}</h1>
                             <div className='flex sm:mt-4 gap-3'>
@@ -81,10 +115,12 @@ function ProjectContainer() {
                         <TimeBar info={{startDate: project.startDate, endDate: project.endDate}}/>
                         <Status info={{status: project.status}}/>
                     </div>
+        </Link>
                 ))
             }
-        </Link>
+            </>
     )
 }
+// bg-[#26262A]
 
 export default ProjectContainer

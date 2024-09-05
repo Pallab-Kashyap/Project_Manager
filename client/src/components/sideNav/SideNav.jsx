@@ -63,7 +63,7 @@ function SideNav({setIsHovered, isActive}) {
                             <img src={item.icon} alt="" />
                         </div>                     
                         <span 
-                        className='sm:hidden group-hover:block text-xl ml-2 relative top-[-2px]'>
+                        className={`sm:hidden group-hover:block text-xl ml-2 relative top-[-2px]`}>
                             {item.name}</span>
                     </Link>
                 </li>

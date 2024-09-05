@@ -9,14 +9,14 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-
+    //<Background>
     <Router>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/signin' element={<SignUP />} />
       </Routes>
     </Router>
-
+    //</Background> 
   )
 }
 

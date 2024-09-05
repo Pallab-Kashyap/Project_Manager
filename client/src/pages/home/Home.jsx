@@ -15,7 +15,7 @@ function Home() {
     const handleResize = () => setDisplaySize(window.innerWidth);
 
     window.addEventListener('resize', handleResize);
-    console.log(displaySize);
+
     if(displaySize > 690) setIsActive(false)
  
     return () => window.removeEventListener('resize', handleResize);
@@ -24,16 +24,16 @@ function Home() {
 
   const topNavClick = () => {
     setIsActive(prev => !prev)
-    console.log('davaya');
+
   }
 
   return (
-    <div className="h-screen overflow-y-hidden md:flex md:flex-col relative">
+    <div className="h-screen md:flex md:flex-col relative">
       <div className=" text-white">
         <TopNav info={{topNavClick, isActive}}/>
       </div>
-      <div className="w-full h-full md:flex">
-        <div className={` w-full h-3/4 sm:w-28 sm:h-full ${isActive ? 'block  z-10' : 'hidden sideNavContainer'} sm:block border-r-2 border-gray-600 absolute ${isHovered ? 'hovered' : ''}`}>
+      <div className="md:flex">
+        <div className={` w-full h-3/4 sm:w-28 sm:h-[716px] sm:m-1 ${isActive ? 'block  z-10' : 'hidden sideNavContainer'} sm:block border-r-2 border-gray-600 absolute ${isHovered ? 'hovered' : ''}`}>
           <SideNav setIsHovered={setIsHovered} isActive={isActive}/>
         </div>
         <div className={`homeContainer flex-1 sm:ml-32 ${isActive ? 'opacity-10' : ''}`}>
