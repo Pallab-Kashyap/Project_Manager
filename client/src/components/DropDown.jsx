@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { DROP_DOWN_TYPES } from "../utils/enum";
+import { useCreateProjectContext } from "./createProject/createProjectContext";
 
-function DropDown({ info }) {
+function DropDown({ info, Status, force }) {
   let exp = ["STARTED", "NOT STARTED", "ON HOLD", "IN PROGRESS"];
+
 
   const [isActive, setIsActive] = useState(false);
   const [isSelected, setIsSelected] = useState(false)
-  const [status, setStatus] = useState("STATUS");
-
+  const { status, setStatus } = Status
+  
 
   useEffect(()=>{
     setIsActive(false)
-    setStatus('STATUS')
     setIsSelected(false)
-  },[ info ])
+  },[force])
 
   const displayOptions = () => {
     setIsActive((prev) => !prev);
@@ -28,7 +29,7 @@ function DropDown({ info }) {
       className={`text-gray-200 border-2 ${isSelected ? 'border-gray-200' : 'border-gray-500'} h-fit  p-3 max-w-36 text-center rounded-2xl`}
       onClick={displayOptions}
     >
-      <ul className="bg-transparent outline-none">
+      <ul className={`bg-transparent outline-none`}>
         {isActive ? (
           <>
             {exp.map((status, index) => (
