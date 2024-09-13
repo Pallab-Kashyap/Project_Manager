@@ -2,19 +2,20 @@ import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeftLong } from "react-icons/fa6";
-import registerUser from "../../APIs/auth.js";
+import {registerUser} from "../../APIs/auth.js";
 import { useSelector,useDispatch } from "react-redux" 
 import { addUser, getUser } from "../../context/userSlice.js";
 
 
 function SignUP() {
   const navigate = useNavigate();
-  const [userName, setuserName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [userName, setuserName] = useState("ae");
+  const [email, setEmail] = useState("a@gmail.com");
+  const [password, setPassword] = useState("a");
   const [validationError, setValidationError] = useState(false);
   const dispatch = useDispatch()
 
+  const us = useSelector(state => state.user)
   const handleClick = async (e) => {
     e.preventDefault();
     setValidationError(false);
@@ -31,11 +32,12 @@ function SignUP() {
     // setuserName('')
     // setEmail("")
     // setPassword('')
-
+    
     const result = await registerUser(data)
     if(result){
-      dispatch(addUser(user))
-      navigate('/home')
+      dispatch(addUser(result.result))
+      console.log(us);
+      navigate('/')
     }
 
 

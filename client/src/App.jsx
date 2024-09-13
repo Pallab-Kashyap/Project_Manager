@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './pages/home/Home'
 import SignUP from './pages/Auth/SignUp'
 import Background from './components/Background/Background'
+import Login from './pages/Auth/LogIn'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/signin' element={<SignUP />} />
+        <Route path='/login' element={<Login />} />
       </Routes>
     </Router>
     //</Background> 

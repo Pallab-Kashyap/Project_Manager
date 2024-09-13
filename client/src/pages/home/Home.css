@@ -94,7 +94,7 @@
     );
     backdrop-filter: none;
     background-color: transparent;
-    z-index: 0;
+    z-index: -30;
   }
 
   25% {
@@ -105,7 +105,7 @@
     );
     backdrop-filter: none;
     background-color: transparent;
-    z-index: 10;
+    z-index: -20;
   }
 
   50% {
@@ -116,7 +116,7 @@
     );
     backdrop-filter: none;
     background-color: transparent;
-    z-index: 20;
+    z-index: -10;
   }
 
   62%{
@@ -137,7 +137,7 @@
     );
     backdrop-filter: none;
     background-color: transparent;
-    z-index: 30;
+    /* z-index: ; */
   }
 
   90% {

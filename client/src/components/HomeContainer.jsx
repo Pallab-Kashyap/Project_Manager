@@ -10,12 +10,13 @@ function HomeContainer() {
 
     const [isCreateProject, setIsCreateProject] = useState(false)
 
-  const createProjectClick = (task) => {
-      isCreateProject ?
-      createProjectClick()
-      :
+    const createProjectClick = (task) => {
+      // isCreateProject ?
+      // createProjectClick()
+      // :
       setIsCreateProject(prev => !prev)
   };
+
 
   return (
     <div className=" flex flex-col">
@@ -33,7 +34,7 @@ function HomeContainer() {
             />
           </div>
           <Button
-            classname={` z-40 absolute bottom-6 right-4 text-white py-2 px-6 sm:ml-96 text-xl font-semibold ${isCreateProject ? 'bottom-[111px] right-[710px] activeCreateProjectBtn border-2 border-gray-500 backdrop-blur-sm bg-white/5' : 'sm:bottom-auto sm:right-32 createProjectBtn'}`}
+            classname={` z-40 absolute bottom-6 right-4 text-white py-2 px-6 sm:ml-96 text-xl font-semibold ${isCreateProject ? ' hidden bottom-[111px] right-[710px] activeCreateProjectBtn border-2 border-gray-500 backdrop-blur-sm bg-white/5' : 'sm:bottom-auto sm:right-32 createProjectBtn'}`}
             text="Create Project"
             onClick={createProjectClick}
           />

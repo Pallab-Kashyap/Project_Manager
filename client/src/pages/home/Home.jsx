@@ -4,12 +4,27 @@ import SideNav from "../../components/sideNav/SideNav";
 import "../../App.css";
 import "./Home.css"
 import HomeContainer from "../../components/HomeContainer";
+import { useSelector } from "react-redux";
+import { getUser } from "../../context/userSlice";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
 
   const [isHovered, setIsHovered] = useState(false)
   const [isActive, setIsActive] = useState(false)
   const [displaySize, setDisplaySize] = useState(window.innerWidth)
+
+  const user = useSelector(state => state.user.user)
+  const navigate = useNavigate()
+  
+  useEffect(() => {
+    
+    if(!user){
+      navigate('/signin')
+    }
+  },[])
+  
+
 
   useEffect(()=>{
     const handleResize = () => setDisplaySize(window.innerWidth);

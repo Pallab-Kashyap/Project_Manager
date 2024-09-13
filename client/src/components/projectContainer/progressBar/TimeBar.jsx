@@ -6,11 +6,12 @@ function TimeBar({info}) {
 
     let remaining = ''
     const now = new Date(); 
-    const endDate = info.endDate;
-    const startedDate = info.startDate
+    const endDate = new Date(info.endDate); 
+    const startedDate = new Date(info.startDate);
     let width = ''
     let color = 'text-green-500'
     let bg = 'bg-green-500'
+    let res = null
 
 
     const calsTime = () => {
@@ -67,6 +68,7 @@ function TimeBar({info}) {
           else{
             width = '0%'
             color = 'text-red-500'
+            res = 'time up'
           }
         
 
@@ -81,7 +83,7 @@ function TimeBar({info}) {
               <div className={`${bg} h-2  rounded-full }`} style={{width}}></div>
             </div>
             </div>
-            <div className='text-center mt-3 hidden group-hover:block text-slate-400'>remaining time: {remaining}</div>
+            <div className='text-center mt-3 hidden group-hover:block text-slate-400'>remaining time: {res || remaining}</div>
         </div>
     )
 }

@@ -19,6 +19,8 @@ const connectDB = async () => {
     console.log('DB connected');
 }catch(err){
     console.log(err);
+    console.log('DB connection failed, re-trying to connect');
+    await connectDB()
 }
 }
 

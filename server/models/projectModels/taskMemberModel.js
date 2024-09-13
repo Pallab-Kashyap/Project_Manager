@@ -12,7 +12,6 @@ const TaskMember = sequelize.define('TaskMember', {
     },
     taskId: {
         type: DataTypes.BIGINT,
-        type: DataTypes.BIGINT,
         references: {
             model: Task, // Name of the model being referenced
             key: 'id'       // Primary key in the UserInfo table

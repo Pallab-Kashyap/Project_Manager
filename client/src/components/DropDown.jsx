@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { DROP_DOWN_TYPES } from "../utils/enum";
-import { useCreateProjectContext } from "./createProject/createProjectContext";
 
 function DropDown({ info, Status, force }) {
-  let exp = ["STARTED", "NOT STARTED", "ON HOLD", "IN PROGRESS"];
+  let exp = ["Completed", "Not Started", "On Hold", "In Progress"];
 
 
   const [isActive, setIsActive] = useState(false);

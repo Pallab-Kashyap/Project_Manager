@@ -6,8 +6,10 @@ const registerUser = async (data) => {
     const result = await axios.post('/auth/signin', data)
 
 
-    if(result)
-        return result
+    if(result){
+        console.log(result);
+        return result.data
+    }
 
     return null
 }catch(err){
@@ -16,4 +18,27 @@ const registerUser = async (data) => {
 }
 }
 
-export default registerUser
+const login = async (data) => {
+    
+    // console.log(data);
+    console.log('ent login');
+    try{
+    const result = await axios.post('/auth/login', data)
+
+
+    if(result){
+        console.log(result);
+        return result.data.result
+    }
+
+    return null
+}catch(err){
+    console.log(err);
+    return null
+}
+}
+
+export {
+    registerUser,
+    login,
+}

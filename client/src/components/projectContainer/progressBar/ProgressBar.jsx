@@ -13,7 +13,7 @@ import './Progress.css'
 function ProgressBar({info}) {
 
         const percentage = (info.completed/info.total)*100
-        const width = `${percentage}%`
+        let width = `${percentage}%`
 
         let color = 'text-green-500'
         let bg = 'bg-green-500'
@@ -36,6 +36,12 @@ function ProgressBar({info}) {
           bg = 'bg-green-500';
           icon = <RiProgress6Line />
         }
+
+        if(info.total === 0){
+          color = 'text-gray-500'
+          icon = <RiProgress1Line />
+          width = '0%'
+        }
         
 
     return (
@@ -48,7 +54,7 @@ function ProgressBar({info}) {
               <div className={`${bg} h-2 sm:mt-[0.2px]  rounded-full ${percentage === 100 ? 'completed' : ''}`} style={{width}}></div>
             </div>
             </div>
-            <div className='text-center mt-3 hidden group-hover:block text-slate-400'>{percentage === 100 ? 'completed 🎉' : `Task: ${info.completed}/${info.total}`}</div>
+            <div className='text-center mt-3 hidden group-hover:block text-slate-400'>{info.total === 0 ? 'Add Task' : (percentage === 100 ? 'completed 🎉' : `Task: ${info.completed}/${info.total}`)}</div>
         </div>
     )
 }
