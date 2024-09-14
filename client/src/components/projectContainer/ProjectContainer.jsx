@@ -162,21 +162,23 @@ let memberList = [
         <Link to='/' key={project.id}
         className='h-full'>
                     <div className='bg-[#2a2a349a] border-2 border-gray-700 shadow-md shadow-white/15 p-2 px-5 mb-3 rounded-3xl sm:grid grid-cols-5  relative' key={project.id}>
-                        <div className='text-white w-full'>
-                            <h1 className='truncate text-2xl sm:text-3xl  overflow-hidden text-ellipsis whitespace-nowrap sm:absolute -top-6 backdrop-blur-sm '>
+                        <div className='text-white  '>
+                            <h1 className='truncate text-2xl sm:text-3xl  overflow-hidden text-ellipsis whitespace-nowrap '>
                                 {project.projectName}
                             </h1>
+                          
+                            
                             <div className='flex mt-3 sm:mt-4 gap-4'>
                                 <img src={userIcon} alt="" className='h-6 w-6 sm:h-7 sm:w-7'/>
                                 <p className='text-slate-400 text-xl truncate overflow-hidden text-ellipsis whitespace-nowrap sm:text-2xl relative -top-1'>{project.creator.userName}</p>
-                            </div>
-                            <div>
-                                <MemberBox list={memberList} />
                             </div>
                         </div>
                         <ProgressBar info={{total: project.TaskCount?.totalTask || 0, completed: project.TaskCount?.completedTask || 0}}/>
                         <TimeBar info={{startDate: project.startDate, endDate: project.endDate}}/>
                         <Status info={{status: project.status}}/>
+                            <div className='pt-5'>
+                                <MemberBox list={memberList} />
+                            </div>
                     </div>
         </Link>
                 ))

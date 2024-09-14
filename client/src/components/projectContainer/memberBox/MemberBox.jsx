@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { prepareAutoBatched } from "@reduxjs/toolkit";
 
 function MemberBox({list}) {
+  console.log(list);
   let position = -2;
   let count = 0;
   let state = "";
@@ -50,7 +51,7 @@ function MemberBox({list}) {
       </div>
 
       {/* MEMBER LIST  */}
-      <div className="m-2 absolute z-10 bg-black p-3 left-0 rounded-xl border-2 border-gray-500 hidden group-hover:block">
+      <div className="m-2 absolute z-10 bg-black p-3 text-white right-0 rounded-xl border-2 border-gray-500 hidden group-hover:block">
         {/* ADD MEMBERS */}
         <div className="flex gap-2 items-end max-w-[350px] mb-2">
           <AddMember
