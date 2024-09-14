@@ -29,45 +29,58 @@ function SideNav({setIsHovered, isActive}) {
         name: 'Contect Us',
         icon: contactIcon
     },
-        {
-        name: 'Logout',
-        icon: logoutIcon
-    },
+    //     {
+    //     name: 'Logout',
+    //     icon: logoutIcon
+    // },
 ]
     return (
-        <div className={`sidenav h-fit w-fit py-6 px- fixed sm:top-40 rounded-xl overflow-hidden text-white ${isActive ? '' : ''}`}>
-            <ul className='group ml-20 sm:ml-0 px-4 py-1 flex flex-col items-center gap-6'
+        <div className={`no-transition-class group h-full py-6 rounded-xl transition-none px-2 text-white `}>
+            <ul className=' ml-20 sm:ml-0 px-1 py-1 mt-5 flex flex-col gap-6 h-full'
                 onMouseEnter={()=>setIsHovered(true)}
                 onMouseLeave={()=>setIsHovered(false)}
             >
-            <li className='hover:bg-gray-400 hover:bg-opacity-25 p-2 pl-3 pr-16 rounded-full'>
+            <li className='hover:bg-gray-400 hover:bg-opacity-25 p-2 rounded-full'>
                     <Link to='/'
-                        className='flex gap-4 items-center'
+                        className='flex gap-4 transition-none'
                     >
                     
                         <div className='text-3xl '>
-                            <img src={notifyIcon} alt="" className='h-[38px] w-[40px] self-end'/>
+                            <img src={notifyIcon} alt="" className='h-[38px] w-[40px]'/>
                         </div>                     
                         <span 
-                        className='sm:hidden group-hover:block text-xl ml-2 relative top-[-2px] '>
+                        className='sm:hidden group-hover:block text-xl ml-2 mt-1  '>
                             Notifications</span>
                     </Link>
                 </li>
                 { list && list.map((item, index) => (
-                <li key={index} className='hover:bg-gray-400 hover:bg-opacity-25 p-2 pl-3 pr-16 rounded-full'>
+                <li key={index} className='hover:bg-gray-400 hover:bg-opacity-25 px-3 p-2 rounded-full'>
                     <Link to='/'
                         
                         className='flex gap-6 items-center'
                     >
                         <div className={`text-3xl ${item.name}`}>
-                            <img src={item.icon} alt="" />
+                            <img src={item.icon} alt=""  />
                         </div>                     
                         <span 
-                        className={`sm:hidden group-hover:block text-xl ml-2 relative top-[-2px]`}>
+                        className={`sm:hidden group-hover:block  text-xl ml-2 relative top-[-2px]`}>
                             {item.name}</span>
                     </Link>
                 </li>
                 ))}
+                    <li className='hover:bg-gray-400 hover:bg-opacity-25 mt-auto mb-5 px-3 p-2 rounded-full'>
+                    <Link to='/'
+                        className='flex gap-4 transition-none'
+                    >
+                    
+                        <div className='text-3xl '>
+                            <img src={logoutIcon} alt="" />
+                        </div>                     
+                        <span 
+                        className='sm:hidden group-hover:block text-xl ml-2 mt-1  '>
+                            Logout</span>
+                    </Link>
+                </li>
             </ul>
         </div>
     )

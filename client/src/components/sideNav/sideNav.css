@@ -1,6 +1,6 @@
-*{
-    transition: all 0.3 ease;
-}
+/* .sideNavTansition{
+  transition: 0.1s linear ;
+} */
 
 .icons {
 
@@ -31,5 +31,8 @@
     width: 38px;
   }
 
+  .no-transition-class{
+    transition: none !important;
+  }
 
 

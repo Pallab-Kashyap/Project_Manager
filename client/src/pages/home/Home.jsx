@@ -44,14 +44,14 @@ function Home() {
 
   return (
     <div className="h-screen md:flex md:flex-col relative">
-      <div className=" text-white">
+      <div className=" pt-2 px-2 text-white">
         <TopNav info={{topNavClick, isActive}}/>
       </div>
-      <div className="md:flex">
-        <div className={` w-full h-3/4 sm:w-28 sm:h-[716px] sm:m-1 ${isActive ? 'block  z-10' : 'hidden sideNavContainer'} sm:block border-r-2 border-gray-600 absolute ${isHovered ? 'hovered' : ''}`}>
+      <div className="sm:flex flex-1">
+        <div className={`sideNavTansition w-full  sm:w-28  ${isActive ? 'block  z-50 absolute bg-black ' : 'hidden '} sm:block border-r-2 border-gray-600 sm:hover:w-72`}>
           <SideNav setIsHovered={setIsHovered} isActive={isActive}/>
         </div>
-        <div className={`homeContainer flex-1 sm:ml-32 ${isActive ? 'opacity-10' : ''}`}>
+        <div className={`flex-1 `}>
             <HomeContainer />
         </div>
       </div>
