@@ -1,6 +1,11 @@
-/* .sideNavTansition{
-  transition: 0.1s linear ;
-} */
+.sideNavTansition{
+  transition: 0.3s linear ;
+  
+}
+
+.sideNavEle{
+  transition: 0.2s linear 0.1s;
+}
 
 .icons {
 

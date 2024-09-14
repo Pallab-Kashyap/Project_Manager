@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import user from "../../assets/user.png";
 import Button from "../Button";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { GiCrossMark } from "react-icons/gi";
 import '../createProject/createProject.css'
@@ -10,15 +10,27 @@ function TopNav({info}) {
 
    let {topNavClick, isActive} = info
 
-   const [isFeedback, setIsFeedback] = useState(true);
+   const navigate = useNavigate()
+   const [isFeedback, setIsFeedback] = useState(false);
    const [feedbackText, setFeedbackText] = useState('');
-   const [feedbackEmoji, setFeedbackEmoji] = useState(1)
+   const [feedbackEmoji, setFeedbackEmoji] = useState(null)
+
+   useEffect(() => {
+    setFeedbackEmoji(null)
+    setFeedbackText('')
+   },[isFeedback])
 
    const feedbackClick = () => {
-    setIsFeedback(true)
+    setIsFeedback(prev => !prev)
    }
    const handleEmojiClick = (e) => {
     setFeedbackEmoji(e.target.value)
+   }
+   const sendFeedback = () => {
+    setIsFeedback(false)
+   }
+   const helpClick = () => {
+    navigate('/')
    }
 
   return (
@@ -64,18 +76,21 @@ function TopNav({info}) {
       {/* user support */}
       <div className="sm:flex hidden relative">
         <div className="feedback flex gap-3 mr-4 items-center ">
-          <Button classname="bg-blue-500 hover:bg-blue-600 px-4 py-1" text="feedback" onClick={feedbackClick} />
-          <Button classname="hover:border-gray-200 border-2 border-gray-500  px-6  py-1" text="help" />
+          <Button classname="bg-transparent text-neutral-300 hover:text-gray-100 hover:bg-neutral-800 border-2 border-neutral-700 px-4 py-1" text="Feedback" onClick={feedbackClick} />
+          <Button classname="bg-transparent text-neutral-300 hover:text-neutral-100  border-neutral-700  px-4  py-1" text="Help" onClick={helpClick}/>
+
+          {/* FEEDBACK */}
           {isFeedback ? 
-            <div className="h-44 z-50 w-72 bg-neutral-800 absolute p-2 top-12 -left-16 rounded-md">
+            <div className="h-fit z-50 w-72 bg-black absolute p-2 top-12 -left-16 rounded-md border-2 border-gray-500">
               <textarea name="" id="" 
                 value={feedbackText}
                 onChange={(e) => setFeedbackText(e.currentTarget.value)}
-                className="h-3/4 w-full text-white p-2 bg-transparent outline-none none border-2 border-gray-500 rounded-md no-underline" 
+                placeholder="Your feedback..."
+                className="h-28 w-full text-white p-2 bg-transparent outline-none none border-2 border-gray-200 rounded-md no-underline" 
               ></textarea>
-              <div className="flex justify-between">
+              <div className="flex justify-between pt-3">
               <div
-                className="flex text-2xl gap-1 px-1 cursor-pointer"
+                className="flex text-2xl gap-1 px-1 cursor-pointer items-center"
               >
                 <option onClick={handleEmojiClick} value={1}
                   className={`${feedbackEmoji == 1 ? 'border-2 border-green-500 h-fit w-fit rounded-full' : ''}`}
@@ -93,16 +108,18 @@ function TopNav({info}) {
                  className={`${feedbackEmoji == 5 ? 'border-2 border-red-600 h-fit w-fit rounded-full' : ''}`}
                 >😞</option>
               </div>
-                <div>
+                
                  <button
-                  className="px-3 py-1 border-2 border-gray-500 rounded-lg"
+                  onClick={sendFeedback}
+                  className="px-4 py-[6px] align-middle hover:border-gray-200 border-2 border-gray-500 rounded-lg"
                  >send</button>  
-                </div>         
+                     
               </div>
             </div>
           : null}
+
         </div>
-        <div className="userLogo  text-white h-9 w-9 mx-4 mt-1 mr-8 hidden sm:block">
+        <div className="userLogo  text-white h-10 w-10 mx-4 mt-1 mr-8 hidden sm:block">
           <img src={user} alt="" />
         </div>
       </div>

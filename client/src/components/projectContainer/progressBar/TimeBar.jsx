@@ -43,6 +43,8 @@ function TimeBar({info}) {
 
       const remainingPercentage = (remainingTime / totalTime) * 100;
       width = `${remainingPercentage}%`
+
+      if(startedDate > now) width = '100%';
       
       // console.log(width);
       return remainingPercentage
@@ -74,7 +76,7 @@ function TimeBar({info}) {
 
 
     return (
-        <div className='progressBar hidden sm:block ml-3 mt-2 p-2 py-3 group'>
+        <div className='progressBar hidden sm:block ml-3 mt-2 p-2 py-3 group flex-1'>
             <div className='flex gap-3 mt-2'>
             <div className={`${color} text-xl`}>
                 <IoIosTimer />

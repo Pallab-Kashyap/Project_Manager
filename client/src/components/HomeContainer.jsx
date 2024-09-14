@@ -41,7 +41,7 @@ function HomeContainer() {
           />
         </div>
       </div>
-      <div className="  flex-1 max-h-[600px] sm:mx-16 sm:mt-10 p-4 sm:max-h-[500px] rounded-xl  overflow-hidden overflow-y-scroll">
+      <div className=" flex-1 max-h-[600px] sm:mx-16 sm:mt-10 p-4 sm:max-h-[500px] rounded-xl flex flex-col gap-3 overflow-hidden overflow-y-scroll">
         <ProjectContainer searchQuery={searchQuery}/>
       </div>
     </div>

@@ -22,7 +22,7 @@ function AddMember({ info,type }) {
     return (
         <div className=''>
             <ul className='flex gap-x-3 gap-2 flex-wrap-reverse border-2 border-gray-500 outline-gray-200 p-3 rounded-xl text-white max-h-72 overflow-scroll'>
-            
+            {/* <div className='flex justify-between'> */}
             <input type="text"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
@@ -30,7 +30,8 @@ function AddMember({ info,type }) {
                 placeholder={`add ${type}`}
                 className='bg-transparent outline-none w-full'
             />
-            
+                {/* <button className='border-2 border-gray-500 py-1 px-3 rounded-lg'>add</button>
+            </div> */}
             {members && members.map((member) => (
                     <div className='flex gap-2 border-2 border-gray-200 p-1 px-2 rounded-xl justify-center items-center'>
                         <li key={member}

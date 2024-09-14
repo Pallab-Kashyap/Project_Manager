@@ -48,7 +48,7 @@ function Home() {
         <TopNav info={{topNavClick, isActive}}/>
       </div>
       <div className="sm:flex flex-1">
-        <div className={`sideNavTansition w-full  sm:w-28  ${isActive ? 'block  z-50 absolute bg-black ' : 'hidden '} sm:block border-r-2 border-gray-600 sm:hover:w-72`}>
+        <div className={`sideNavTansition w-full  sm:w-20  ${isActive ? 'block  z-50 absolute bg-black ' : 'hidden '} sm:block border-r-2 border-gray-600 sm:hover:w-64`}>
           <SideNav setIsHovered={setIsHovered} isActive={isActive}/>
         </div>
         <div className={`flex-1 `}>

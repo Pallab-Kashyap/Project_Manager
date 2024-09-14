@@ -5,6 +5,7 @@ import notifyIcon from './notification.png'
 import taskIcon from './task.png'
 import contactIcon from './contact.png'
 import logoutIcon from './logout.png'
+import projectIcon from './projects.png'
 
 export {
     notifyIcon,
@@ -13,4 +14,5 @@ export {
     taskIcon,
     contactIcon,
     logoutIcon,
+    projectIcon,
 }
