@@ -13,16 +13,42 @@ const sequelize = new Sequelize(name, user, password, {
     logging: false
 })
 
-const connectDB = async () => {
-    try{
-    await sequelize.authenticate();
-    console.log('DB connected');
-}catch(err){
-    console.log(err);
-    console.log('DB connection failed, re-trying to connect');
-    await connectDB()
-}
-}
+// const connectDB = async () => {
+//     try{
+//     await sequelize.authenticate();
+//     console.log('DB connected');
+// }catch(err){
+//     console.log(err);
+//     console.log('DB connection failed, re-trying to connect');
+//     await connectDB()
+// }
+// }
+
+const connectDB = async (retries = 5, delay = 5000) => {
+    try {
+      await sequelize.authenticate();
+      console.log('DB connected successfully');
+    } catch (err) {
+      if (err.name === 'SequelizeConnectionRefusedError') {
+        console.error('DB connection refused, retrying...', err);
+  
+        // Retry logic with a delay
+        if (retries > 0) {
+          console.log(`Retries left: ${retries}, retrying in ${delay / 1000} seconds...`);
+  
+          setTimeout(() => {
+            connectDB(retries - 1, delay); // Retry after delay
+          }, delay);
+        } else {
+          console.error('Failed to connect to the DB after multiple attempts. Exiting...');
+          process.exit(1); // Exit the process after all retries are exhausted
+        }
+      } else {
+        console.error('DB connection error, not retrying:', err);
+        process.exit(1); // Exit the process for other types of errors
+      }
+    }
+  };
 
 module.exports = {
     connectDB,

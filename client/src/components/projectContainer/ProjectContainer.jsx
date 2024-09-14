@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getAllProjects } from '../../APIs/project'
 import { addProject, fetchProject } from '../../context/projectSlice'
 
-function ProjectContainer() {
+function ProjectContainer({ searchQuery }) {
 
     const dispatch = useDispatch()
 
@@ -21,13 +21,15 @@ useEffect(() => {
         if(list.length === 0){
            list = await getAllProjects()
            dispatch(fetchProject(list))
-           setProjectList(list)
+           let filteredList = list.filter((project) => project.projectName.toLowerCase().includes(searchQuery.toLowerCase()))
+           setProjectList(filteredList)
         }
         else{
-            setProjectList(list)
+            let filteredList = list.filter((project) => project.projectName.toLowerCase().includes(searchQuery.toLowerCase()))
+            setProjectList(filteredList)    
         }
 })();
-},[list])
+},[list, searchQuery])
 
 // console.log(projectList);
 
@@ -131,8 +133,10 @@ useEffect(() => {
         <Link to='/' key={project.id}
         className='h-full'>
                     <div className='bg-[#2a2a349a] border-2 border-gray-700 shadow-md shadow-white/15 p-5 mb-3 rounded-3xl sm:grid grid-cols-5' key={project.id}>
-                        <div className='text-white col-span-2 '>
-                            <h1 className=' text-xl sm:text-4xl'>{project.projectName}</h1>
+                        <div className='text-white w-full '>
+                            <h1 className='truncate text-xl sm:text-4xl w-full overflow-hidden text-ellipsis whitespace-nowrap hover:'>
+                                {project.projectName}
+                            </h1>
                             <div className='flex sm:mt-4 gap-3'>
                                 <img src={logo} alt="" className='h-8 w-8 hidden sm:block'/>
                                 <p className='text-slate-400 text-2xl'>{project.creator.userName}</p>

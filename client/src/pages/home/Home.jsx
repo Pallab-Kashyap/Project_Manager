@@ -20,7 +20,7 @@ function Home() {
   useEffect(() => {
     
     if(!user){
-      navigate('/signin')
+      navigate('/login')
     }
   },[])
   

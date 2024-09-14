@@ -45,18 +45,21 @@ function CreateProject({ info }) {
   //CREATING PROJECT
   const createProjectClick = async () => {
     if (!isCreateProject) return setIsCreateProject((prev) => !prev);
-    if(status === 'STATUS'){
-      console.log('ent status');
-      if(startDate > new Date()) setStatus(STATUS.NOT_STARTED)
-      else setStatus(STATUS.IN_PROGRESS)
-    console.log(status);
+    let newStatus = status
+    if(newStatus === 'STATUS'){
+      if(startDate > new Date()) newStatus = STATUS.NOT_STARTED
+      else newStatus = STATUS.IN_PROGRESS
     }
-    console.log(status === 'STATUS');
+
+    console.log(startDate);
+    console.log(endDate);
+    console.log(new Date());
+    
     const data = {
       projectName,
       startDate,
       endDate,
-      status,
+      status : newStatus,
       description,
     };
 

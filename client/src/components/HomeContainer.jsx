@@ -9,6 +9,7 @@ import CreateProject from "./createProject/CreateProject";
 function HomeContainer() {
 
     const [isCreateProject, setIsCreateProject] = useState(false)
+    const [searchQuery, setSearchQuery] = useState('')
 
     const createProjectClick = (task) => {
       // isCreateProject ?
@@ -23,7 +24,7 @@ function HomeContainer() {
         <CreateProject info={{isCreateProject,setIsCreateProject,createProjectClick}}/>
       <div className={``}>
         <div className=" m-2 sm:m-8 sm:mx-12 sm:px-16">
-          <SearchBar />
+          <SearchBar props={{searchQuery, setSearchQuery}}/>
         </div>
         <div className="flex reletive sm:px-16 sm:mx-16 justify-between">
           <div className="flex ml-8 sm:ml-0 font-medium">
@@ -41,7 +42,7 @@ function HomeContainer() {
         </div>
       </div>
       <div className="  flex-1 max-h-[600px] sm:mx-16 sm:mt-10 p-4 sm:max-h-[500px] rounded-xl  overflow-hidden overflow-y-scroll">
-        <ProjectContainer />
+        <ProjectContainer searchQuery={searchQuery}/>
       </div>
     </div>
   );
