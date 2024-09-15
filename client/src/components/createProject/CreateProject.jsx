@@ -33,6 +33,7 @@ function CreateProject({ info }) {
     setStartDate(new Date());
     setEndDate(null);
     setMembers([]);
+    setAdmins([])
     setForce((prev) => !prev);
   }, [info]);
 
