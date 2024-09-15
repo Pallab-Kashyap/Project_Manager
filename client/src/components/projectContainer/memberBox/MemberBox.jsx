@@ -23,6 +23,7 @@ function MemberBox({list}) {
   const addMember = () => {
     if(email.length === 0) return 
     setMembers(prev => [...email, ...prev])
+    setEmail([])
   }
 
   useEffect(() => {
