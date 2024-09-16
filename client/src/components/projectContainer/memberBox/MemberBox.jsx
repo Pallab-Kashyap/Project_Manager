@@ -5,7 +5,7 @@ import AddMember from "../../createProject/AddMember";
 import { Link } from "react-router-dom";
 
 function MemberBox({list}) {
-  console.log(list);
+
   let position = -2;
   let count = 0;
   let state = "";
@@ -37,26 +37,26 @@ function MemberBox({list}) {
 
   return (
     <div onMouseEnter={() => setEmail([])} className="p-1 mt-1 w-fit group">
-      <div className="flex gap group-hover:hidden ">
+      <div className="flex gap group-hover:hidden reletive">
         {members.map((user) => {
           {
-            position += 1;
+            position += 10;
             count++;
             if (count > 5) state = "hidden";
           }
           return (
             <div
-              className={` relative -left-${position} ${state} border-2  border-white h-fit w-fit rounded-full`}
+              className={` reletive ${state} border-2  border-white h-fit w-fit rounded-full`}
               key={user.id}
             >
-              <img src={userIcon} alt="" className="h-6 w-6" />
+              <img src={userIcon} alt="" className="h-7 w-7" />
             </div>
           );
         })}
       </div>
 
       {/* MEMBER LIST  */}
-      <div className="m-2 absolute z-10 bg-black p-3 text-white right-6 top-0 rounded-xl border-2 border-gray-500 hidden group-hover:block">
+      <div className="m-2 absolute z-10 bg-black p-3 text-white right-6 top-0 rounded-xl border-2 border-gray-500 hidden group-hover:block max-h-96 overflow-y-scroll">
         {/* ADD MEMBERS */}
         <div className="flex gap-2 items-end max-w-[350px] mb-2">
           <AddMember

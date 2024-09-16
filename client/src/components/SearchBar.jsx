@@ -11,7 +11,7 @@ function SearchBar({ props }) {
   console.log(searchQuery)
 
   return (
-    <div className={`p-2 py-px rounded-lg border-2 border-gray-500 bg-transparent flex`}>
+    <div className={`p-2 py-px rounded-lg border-2 border-gray-500 bg-transparent flex w-5/6 sm:w-auto`}>
         <button className="text-2xl p-1 px-2 text-white">
           <FiSearch />
         </button>

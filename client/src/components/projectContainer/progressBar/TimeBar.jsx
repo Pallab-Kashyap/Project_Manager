@@ -76,16 +76,16 @@ function TimeBar({info}) {
 
 
     return (
-        <div className='progressBar hidden sm:block ml-3 mt-2 p-2 py-3 group'>
-            <div className='flex gap-3 mt-2'>
+        <div className='progressBar hidden sm:block ml-3 mt-3 px-2  group'>
+            <div className='flex gap-3 mt-4'>
             <div className={`${color} text-xl`}>
                 <IoIosTimer />
             </div>
-            <div className='w-full mt-[1px] p-1 border-2 border-gray-500 rounded-full'>
+            <div className='w-full mt-[1px] p-1 border-2 border-gray-500 rounded-full flex items-center'>
               <div className={`${bg} h-2  rounded-full }`} style={{width}}></div>
             </div>
             </div>
-            <div className='text-center mt-3 hidden group-hover:block text-slate-400'>remaining time: {res || remaining}</div>
+            <div className='text-center mt-2 hidden group-hover:block text-slate-400'>remaining time: {res || remaining}</div>
         </div>
     )
 }

@@ -10,11 +10,14 @@ import { useNavigate } from "react-router-dom";
 
 function Home() {
 
+  console.log('home comp renderd');
+
   const [isHovered, setIsHovered] = useState(false)
   const [isActive, setIsActive] = useState(false)
   const [displaySize, setDisplaySize] = useState(window.innerWidth)
 
   const user = useSelector(state => state.user.user)
+  console.log(user);
   const navigate = useNavigate()
   
   useEffect(() => {
@@ -60,3 +63,4 @@ function Home() {
 }
 
 export default Home;
+// if i have context in store of redux tool kit and i refresh the page will the data be lost or it will still be there

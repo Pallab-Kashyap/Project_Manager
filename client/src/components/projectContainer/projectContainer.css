@@ -1,0 +1,13 @@
+.project-setting{
+    animation: moveSlide 0.27s ease-in ;
+}
+
+@keyframes moveSlide {
+    0%{
+        right: -400px;
+    }
+
+    100%{
+        right: 0;
+    }
+}

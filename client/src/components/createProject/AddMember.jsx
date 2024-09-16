@@ -26,7 +26,7 @@ function AddMember({ info,type }) {
 
     return (
         <div className=''>
-            <ul className='flex gap-x-3 gap-2 flex-wrap-reverse border-2 border-gray-500 outline-gray-200 p-3 rounded-xl text-white max-h-72 overflow-scroll'>
+            <ul className='flex gap-x-3 gap-2 flex-wrap-reverse border-2 border-gray-500 outline-gray-200 p-3 px-3 rounded-xl text-white max-h-36 overflow-y-scroll'>
             {/* <div className='flex justify-between'> */}
             <input type="text"
                 value={inputValue}

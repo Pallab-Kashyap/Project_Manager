@@ -28,10 +28,12 @@ const projectSlice = createSlice({
       state.projectList = [action.payload, ...state.projectList]
     },
 
+    resetProject: () => initialState,
+
     getProject: (state) => state
   },
 })
 
-export const { fetchProject, addProject, getProject } = projectSlice.actions
+export const { fetchProject, addProject, getProject, resetProject } = projectSlice.actions
 
 export default projectSlice.reducer

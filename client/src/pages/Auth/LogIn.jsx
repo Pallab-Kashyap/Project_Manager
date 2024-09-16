@@ -5,6 +5,7 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import { login } from "../../APIs/auth";
 import { useDispatch } from "react-redux";
 import { addUser } from "../../context/userSlice";
+import { resetData } from "../../context/store";
 
 function Login() {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ function Login() {
     const result = await login(body)
 
     if(result){
-        console.log(result);
+        resetData()
         dispatch(addUser(result))
       navigate('/')
     }

@@ -9,18 +9,26 @@ import { getAllProjects } from "../../APIs/project";
 import { addProject, fetchProject } from "../../context/projectSlice";
 import MemberBox from "./memberBox/MemberBox";
 import { BsThreeDots } from "react-icons/bs";
+import ProjectSettings from "./ProjectSettings";
 
-function ProjectContainer({ searchQuery }) {
+function ProjectContainer({ searchQuery, projectSetting }) {
+
   const dispatch = useDispatch();
 
+  const { isProjectSetting, setIsProjectSetting } = projectSetting
   let [projectList, setProjectList] = useState([]);
 
   let list = useSelector((state) => state.project.projectList);
+  if(list.length > 0){
+  console.log('have prject');
+  console.log(list);}
 
   useEffect(() => {
     (async () => {
       if (list.length === 0) {
         list = await getAllProjects();
+        console.log('got project');
+        console.log(list);
         dispatch(fetchProject(list));
         let filteredList = list.filter((project) =>
           project.projectName.toLowerCase().includes(searchQuery.toLowerCase())
@@ -150,7 +158,7 @@ function ProjectContainer({ searchQuery }) {
       userName: "username",
     },
     {
-      id: 5,
+      id: 6,
       icon: userIcon,
       userName: "username",
     },
@@ -158,12 +166,15 @@ function ProjectContainer({ searchQuery }) {
 
   return (
     <>
+      {isProjectSetting && (
+        <ProjectSettings setIsProjectSetting={setIsProjectSetting}/>
+      )}
       {projectList.map((project) => (
-        <div className="relative mb-5" key={project.id}>
+        <div className="relative mb-5 px-5 sm:px-0 bg-[#2a2a3454] border-2 border-neutral-800 rounded-3xl" key={project.id}>
           <Link
             to="/"
             key={project.id}
-            className="bg-[#2a2a349a] border-2 border-gray-700 p-2 px-5 rounded-3xl sm:grid grid-cols-5  relative"
+            className=" p-2 px-5 rounded-3xl sm:grid grid-cols-5 relative"
           >
             <div className="text-white  ">
               <h1 className="truncate text-2xl sm:text-3xl  overflow-hidden text-ellipsis whitespace-nowrap ">
@@ -187,15 +198,13 @@ function ProjectContainer({ searchQuery }) {
               info={{ startDate: project.startDate, endDate: project.endDate }}
             />
             <Status info={{ status: project.status }} />
-            <div className="pt-5 flex justify-between">
+            <div className="pt-5 sm:flex justify-between hidden">
               <MemberBox list={memberList} />
             </div>
           </Link>
           <div
-            onClick={(e) => {
-              console.log("clu");
-            }}
-            className="text-white mt-1 mr-3 p-2 text-2xl absolute top-7 cursor-pointer right-5"
+            onClick={() => setIsProjectSetting(true)}
+            className="text-white mt-1 mr-3 p-2 text-2xl absolute top-7 cursor-pointer right-5 hidden sm:block"
           >
             <BsThreeDots />
           </div>

@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
-import userReducers from './userSlice'
-import projectReducers from './projectSlice'
+import userReducers, { resetUser } from './userSlice'
+import projectReducers, { resetProject } from './projectSlice'
 
 const store = configureStore({
   reducer: {
@@ -8,5 +8,10 @@ const store = configureStore({
     project : projectReducers
   }
 })
+
+export const resetData = () => {
+  store.dispatch(resetUser())
+  store.dispatch(resetProject())
+}
 
 export default store

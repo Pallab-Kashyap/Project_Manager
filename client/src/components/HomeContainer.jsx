@@ -7,8 +7,11 @@ import { useSearchParams } from "react-router-dom";
 import CreateProject from "./createProject/CreateProject";
 
 function HomeContainer() {
+
+  console.log('homeContianer renderd');
   const [isCreateProject, setIsCreateProject] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isProjectSetting, setIsProjectSetting] = useState(true);
 
   const createProjectClick = (task) => {
     // isCreateProject ?
@@ -23,8 +26,8 @@ function HomeContainer() {
         info={{ isCreateProject, setIsCreateProject, createProjectClick }}
       />
       <div className={``}>
-        <div className="flex reletive sm:px-8 sm:mx-16 justify-between  mt-7">
-          <div className="flex ml-8 sm:ml-0 font-medium gap-3">
+        <div className="flex reletive sm:px-8 sm:mx-16 justify-between mt-5 sm:mt-9">
+          <div className="flex ml-8 sm:ml-0 font-medium sm:gap-3 gap-4 flex-wrap-reverse">
             <Button classname="py-1 px-5 border-2 border-gray-500 text-neutral-300" text="sort" />
             <Button
               classname="py-1 px-5 border-2 border-gray-500 text-neutral-300"
@@ -33,7 +36,7 @@ function HomeContainer() {
             <SearchBar props={{ searchQuery, setSearchQuery }} />
           </div>
           <Button
-            classname={` z-40 absolute bottom-6 right-4 text-white py-2 px-6 sm:ml-96 text-xl font-semibold ${
+            classname={` z-40 absolute top-36 sm:top-28 right-4 text-white py-2 px-6 sm:ml-96 text-xl font-semibold ${
               isCreateProject
                 ? " hidden bottom-[111px] right-[710px] activeCreateProjectBtn border-2 border-gray-500 backdrop-blur-sm bg-white/5"
                 : "sm:bottom-auto sm:right-32 createProjectBtn"
@@ -43,8 +46,8 @@ function HomeContainer() {
           />
         </div>
       </div>
-      <div className=" flex-1 max-h-[600px] sm:mx-16 sm:mt-10 p-4 rounded-xl overflow-hidden overflow-y-scroll ">
-        <ProjectContainer searchQuery={searchQuery} />
+      <div className=" flex-1 max-h-[600px] sm:mx-16 mt-5 sm:mt-7 p-4 rounded-xl overflow-hidden overflow-y-scroll ">
+        <ProjectContainer searchQuery={searchQuery} projectSetting={{isProjectSetting, setIsProjectSetting}} />
       </div>
     </div>
   );

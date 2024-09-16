@@ -83,15 +83,19 @@ function CreateProject({ info }) {
         isCreateProject ? "block" : "hidden"
       } flex place-content-center items-center`}
     >
-      <div className="border-gray-500 border-2 h-fit w-fit bg-red-400">
+      <div className="border-gray-500 border-2 h-fit w-fit ">
         <button
           onClick={() => clearState()}
-          className="closeCreateProjectBtn absolute top-8 right-32 z-30 p-6  rounded-full"
+          className="closeCreateProjectBtn absolute top-32 text-4xl right-32 z-30 p-3 text-white rounded-full"
         >
           <GiCrossMark />
         </button>
       </div>
+
+      {/* CONTENT */}
       <div className={`createProject grid grid-cols-2 `}>
+
+        {/* BOX-1*/}
         <div className="h-full w-full border-r-2 border-gray-500 p-12">
           <input
             type="text"
@@ -114,7 +118,7 @@ function CreateProject({ info }) {
           ></textarea>
 
           {/* ADD MEMBER/ADMIN */}
-          <div className="py-10 grid grid-cols-2 gap-2">
+          <div className="py-10 grid grid-cols-2 gap-4">
             <AddMember info={{ members, setMembers }} type="member" />
             <AddMember
               info={{ members: admins, setMembers: setAdmins }}
@@ -123,15 +127,15 @@ function CreateProject({ info }) {
           </div>
         </div>
 
-        {/* RIGHT BOX */}
-        <div className="h-full w-full  p-12">
+        {/* BOX-2 */}
+        <div className="h-full w-full  p-12 flex flex-col">
           <div className="grid grid-cols-3">
             <DropDown info={[]} Status={{ status, setStatus }} force={force} />
 
             {/* VISIBILITY  */}
 
             <div
-              className={`text-gray-200 border-2 ${
+              className={`text-gray-200 border-2 ml-5 ${
                 visibility ? "border-gray-200" : "border-gray-500"
               } h-fit  p-3 max-w-36 text-center rounded-2xl`}
               onClick={() => setVisbility((prev) => !prev)}
@@ -140,22 +144,24 @@ function CreateProject({ info }) {
             </div>
           </div>
 
-          <div className="selectDate grid grid-cols-2 py-12 bg-transparent text-white">
+          <div className="selectDate flex gap-4 py-12 bg-transparent text-white">
             <SelectDate info={{ date: startDate, setDate: setStartDate }} />
             <SelectDate info={{ date: endDate, setDate: setEndDate }} />
             {/* <SelectDate /> */}
           </div>
-        </div>
-      </div>
+          <div className="flex-1"></div>
       <Button
-        classname={` z-40 absolute bottom-6 right-4 text-white py-2 px-6 sm:ml-96 text-xl font-semibold ${
+        classname={`createProjectBtn  text-white py-2 w-fit self-center px-6 text-xl font-semibold ${
           isCreateProject
-            ? "bottom-[111px] right-[710px] activeCreateProjectBtn border-2 border-gray-500 backdrop-blur-sm bg-white/5"
+            ? "activeCreateProjectBtn border-2 "
             : "sm:bottom-auto sm:right-32 createProjectBtn"
         }`}
         text="Create Project"
         onClick={createProjectClick}
       />
+        </div>
+      </div>
+      
     </div>
   );
 }
