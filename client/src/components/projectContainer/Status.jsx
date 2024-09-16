@@ -43,7 +43,7 @@ function Status({info}) {
     }
 
     return (
-        <div className='text-white relative  sm:p-6 sm:px-16 flex-1'>
+        <div className='text-white relative  sm:p-6 sm:px-16 flex justify-center whitespace-nowrap h-fit'>
             <div className={`${bg} ${color} ${border} text-center opacity text-md rounded-2xl  p-1 px-3 flex justify-center items-center w-fit gap-2 absolute sm:relative top-[-42px] right-1 sm:top-auto sm:bottom-auto`}
 
             >

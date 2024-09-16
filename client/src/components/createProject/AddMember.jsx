@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 function AddMember({ info,type }) {
 
@@ -14,10 +14,15 @@ function AddMember({ info,type }) {
             }
      }
     }
+
     const handleClick = (member) => {
         let updatedMembers = members.filter(currMember => currMember != member)
         setMembers(updatedMembers)
     }
+
+    useEffect(()=>{
+        setInputValue('')
+    },[members])
 
     return (
         <div className=''>

@@ -45,7 +45,7 @@ function ProgressBar({info}) {
         
 
     return (
-        <div className='progressBar hidden sm:block p-2 mt-2 py-3 group flex-1'>
+        <div className='progressBar hidden sm:block p-2 mt-2 py-3 group'>
             <div className='flex gap-3 mt-2'>
             <div className={`${color} text-xl `}>
                 {icon}
