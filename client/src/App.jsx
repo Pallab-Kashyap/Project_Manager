@@ -5,6 +5,7 @@ import Home from './pages/home/Home'
 import SignUP from './pages/Auth/SignUp'
 import Background from './components/Background/Background'
 import Login from './pages/Auth/LogIn'
+import ProjectPage from './pages/projectPage/ProjectPage'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -14,8 +15,10 @@ function App() {
     <Router>
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/project' element={<ProjectPage />} />
         <Route path='/signin' element={<SignUP />} />
         <Route path='/login' element={<Login />} />
+        
       </Routes>
     </Router>
     //</Background> 

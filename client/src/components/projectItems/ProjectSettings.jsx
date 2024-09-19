@@ -1,5 +1,5 @@
 import React from 'react'
-import './projectContainer.css'
+import './projectItems.css'
 
 function ProjectSettings({setIsProjectSetting}) {
     return (

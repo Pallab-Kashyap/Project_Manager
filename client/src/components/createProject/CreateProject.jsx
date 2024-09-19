@@ -31,7 +31,7 @@ function CreateProject({ info }) {
     setVisbility(true);
     setStatus("STATUS");
     setStartDate(new Date());
-    setEndDate(null);
+    setEndDate(new Date(new Date().setDate(new Date().getDate() + 2)));
     setMembers([]);
     setAdmins([])
     setForce((prev) => !prev);

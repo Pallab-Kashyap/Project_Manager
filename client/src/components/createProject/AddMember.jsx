@@ -44,7 +44,8 @@ function AddMember({ info,type }) {
                         >{member}</li>
                         <button
                             onClick={() => handleClick(member)}
-                            className='border-2 border-red-400 text-red-400 rounded-full h-7 w-7  flex justify-center  '>x</button>
+                            className='border-2 border-red-400 text-red-400 rounded-full h-6 w-6  flex justify-center leading-4'
+                        >x</button>
                     </div>
                 ))}
              </ul>

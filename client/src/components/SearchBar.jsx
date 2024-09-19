@@ -20,7 +20,7 @@ function SearchBar({ props }) {
         value={searchQuery}
         placeholder="Search"
         onChange={handleChange}
-        className={` bg-transparent flex-1 outline-none px-3 text-gray-200 text-md `}
+        className={` bg-transparent flex-1 outline-none px-1 text-gray-200 text-md `}
       />
     </div>
   );

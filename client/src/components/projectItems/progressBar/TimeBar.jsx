@@ -70,7 +70,7 @@ function TimeBar({info}) {
           else{
             width = '0%'
             color = 'text-red-500'
-            res = 'time up'
+            res = '0'
           }
         
 

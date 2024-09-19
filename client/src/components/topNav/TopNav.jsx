@@ -20,6 +20,11 @@ function TopNav({info}) {
     setFeedbackText('')
    },[isFeedback])
 
+   window.addEventListener('click', (e) => {
+    if(e.target.classList.contains('feedback-btn')) return
+    if(!e.target.classList.contains('feedback-box')) setIsFeedback(false)
+   })
+
    const feedbackClick = () => {
     setIsFeedback(prev => !prev)
    }
@@ -76,36 +81,36 @@ function TopNav({info}) {
       {/* user support */}
       <div className="sm:flex hidden relative">
         <div className="feedback flex gap-3 mr-4 items-center ">
-          <Button classname="bg-transparent text-neutral-300 hover:text-gray-100 hover:bg-neutral-800 border-2 border-neutral-700 px-4 py-1" text="Feedback" onClick={feedbackClick} />
+          <Button classname="feedback-btn bg-transparent text-neutral-300 hover:text-gray-100 hover:bg-neutral-800 border-2 border-neutral-700 px-4 py-1" text="Feedback" onClick={feedbackClick} />
           <Button classname="bg-transparent text-neutral-300 hover:text-neutral-100  border-neutral-700  px-4  py-1" text="Help" onClick={helpClick}/>
 
           {/* FEEDBACK */}
           {isFeedback ? 
-            <div className="h-fit z-50 w-72 bg-black absolute p-2 top-12 -left-16 rounded-md border-2 border-gray-500">
+            <div className="feedback-box h-fit z-50 w-72 bg-black absolute p-2 top-12 -left-16 rounded-md border-2 border-gray-500">
               <textarea name="" id="" 
                 value={feedbackText}
                 onChange={(e) => setFeedbackText(e.currentTarget.value)}
                 placeholder="Your feedback..."
-                className="h-28 w-full text-white p-2 bg-transparent outline-none none border-2 border-gray-200 rounded-md no-underline" 
+                className="feedback-box h-28 w-full text-white p-2 bg-transparent outline-none none border-2 border-gray-200 rounded-md no-underline" 
               ></textarea>
-              <div className="flex justify-between pt-3">
+              <div className="feedback-box flex justify-between pt-3">
               <div
-                className="flex text-2xl gap-1 px-1 cursor-pointer items-center"
+                className="feedback-box flex text-2xl gap-1 px-1 cursor-pointer items-center"
               >
                 <option onClick={handleEmojiClick} value={1}
-                  className={`${feedbackEmoji == 1 ? 'border-2 border-green-500 h-fit w-fit rounded-full' : ''}`}
+                  className={`feedback-box ${feedbackEmoji == 1 ? 'border-2 border-green-500 h-fit w-fit rounded-full' : ''}`}
                 >😄</option>
                 <option onClick={handleEmojiClick} value={2}
-                  className={`${feedbackEmoji == 2 ? 'border-2 border-blue-500 h-fit w-fit rounded-full' : ''}`}
+                  className={`feedback-box ${feedbackEmoji == 2 ? 'border-2 border-blue-500 h-fit w-fit rounded-full' : ''}`}
                 >😊</option>
                 <option onClick={handleEmojiClick} value={3}
-                 className={`${feedbackEmoji == 3 ? 'border-2 border-yellow-500 h-fit w-fit rounded-full' : ''}`}
+                 className={`feedback-box ${feedbackEmoji == 3 ? 'border-2 border-yellow-500 h-fit w-fit rounded-full' : ''}`}
                 >😗</option>
                 <option onClick={handleEmojiClick} value={4}
-                 className={`${feedbackEmoji == 4 ? 'border-2 border-orange-500 h-fit w-fit rounded-full' : ''}`}
+                 className={`feedback-box ${feedbackEmoji == 4 ? 'border-2 border-orange-500 h-fit w-fit rounded-full' : ''}`}
                 >😑</option>
                 <option onClick={handleEmojiClick} value={5}
-                 className={`${feedbackEmoji == 5 ? 'border-2 border-red-600 h-fit w-fit rounded-full' : ''}`}
+                 className={`feedback-box ${feedbackEmoji == 5 ? 'border-2 border-red-600 h-fit w-fit rounded-full' : ''}`}
                 >😞</option>
               </div>
                 
