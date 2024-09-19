@@ -35,9 +35,9 @@ function SideNav({setIsHovered, isActive}) {
 },
 ]
     return (
-        <div className={`no-transition-class group h-full py-6 rounded-xl transition-none px-2 text-white `}>
-            <ul className=' ml-20 sm:ml-0 px-1 py-1 mt-5 flex flex-col gap-4 h-full'
-                onMouseEnter={()=>setIsHovered(true)}
+        <div className={`no-transition-class group h-full py-6 rounded-xl transition-none px-2 text-white`}>
+            <ul className=' ml-20 sm:ml-0 px-1 py-1 mt-5 flex flex-col  gap-4 h-full'
+                onMouseEnter={(e)=> setIsHovered(true)}
                 onMouseLeave={()=>setIsHovered(false)}
             >
             <li className='hover:bg-gray-400 hover:bg-opacity-25 p-1 px-2 rounded-full'>
@@ -49,7 +49,7 @@ function SideNav({setIsHovered, isActive}) {
                             <img src={notifyIcon} alt="" className='h-[36px] w-[36px]'/>
                         </div>                     
                         <span 
-                        className='sideNavEle sm:opacity-0 sm:absolute group-hover:opacity-100 left-16 text-xl ml-2 mt-1  '>
+                        className='sideNavEle  sm:opacity-0 sm:absolute group-hover:opacity-100 pointer-events-none left-16 text-xl ml-2 mt-1  '>
                             Notifications</span>
                     </Link>
                 </li>
