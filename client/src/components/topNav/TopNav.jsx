@@ -39,7 +39,7 @@ function TopNav({info}) {
    }
 
   return (
-    <div className="bg-neutral-60 py-2 rounded-full border-2 border-gray-600 h-fit  flex sm:justify-between">
+    <div className="bg-neutral-60 py-3 px-10  border-b-2 border-gray-600  flex sm:justify-between">
       
       {/* navBar for mabile */}
       <div className="mobileNave sm:hidden p-3 text-2xl flex justify-center items-center"
@@ -49,29 +49,27 @@ function TopNav({info}) {
       </div>
 
       {/* nabBar for web */}
-      <div className="LOGO  flex px-4 py-2 sm:ml-5">
-        <div className="h-8 w-8">
-          <img src={user} alt="" />
-        </div>
-        <p className="px-3 pt-px">project</p>
+
+      <div className="sm:">
+        <p className="text-2xl">project</p>
       </div>
 
       {/* nav actions */}
-      <div className="pageNav hidden sm:block py-[10px]">
-        <ul className="flex gap-10">
-          <li className="group">
+      <div className="pageNav hidden sm:block ">
+        <ul className="flex gap-8 pt-2 text-sm text-gray-300 ">
+          <li className="group hover:text-white">
             <NavLink to="/">Home</NavLink>
-            <div className="topNavLink rounded-full h-1 w-0 group-hover:w-full transition-all "></div>
+            <div className="topNavLink rounded-full h-1 w-0 group-hover:w-full transition-all relative"></div>
           </li>
-          <li className="group">
+          <li className="group hover:text-white">
             <NavLink to="/">About</NavLink>
             <div className="topNavLink rounded-full h-1 w-0 group-hover:w-full transition-all "></div>
           </li>
-          <li className="group">
+          <li className="group hover:text-white">
             <NavLink to="/">Pricing</NavLink>
             <div className="topNavLink rounded-full h-1 w-0 group-hover:w-full transition-all "></div>
           </li>
-          <li className="group">
+          <li className="group hover:text-white">
             <NavLink to="/">Leaderboard</NavLink>
             <div className="topNavLink rounded-full h-1 w-0 group-hover:w-full transition-all "></div>
           </li>
@@ -80,13 +78,13 @@ function TopNav({info}) {
 
       {/* user support */}
       <div className="sm:flex hidden relative">
-        <div className="feedback flex gap-3 mr-4 items-center ">
-          <Button classname="feedback-btn bg-transparent text-neutral-300 hover:text-gray-100 hover:bg-neutral-800 border-2 border-neutral-700 px-4 py-1" text="Feedback" onClick={feedbackClick} />
-          <Button classname="bg-transparent text-neutral-300 hover:text-neutral-100  border-neutral-700  px-4  py-1" text="Help" onClick={helpClick}/>
+        <div className="feedback flex gap-4 mr-7 items-center ">
+          <Button classname="feedback-btn bg-transparent text-neutral-300 hover:text-gray-100 hover:bg-neutral-800 border-2 border-neutral-700 px-3 py-1 align-middle" text="Feedback" onClick={feedbackClick} />
+          <Button classname="bg-transparent text-neutral-300 hover:text-neutral-100  border-neutral-700 " text="Help" onClick={helpClick}/>
 
           {/* FEEDBACK */}
           {isFeedback ? 
-            <div className="feedback-box h-fit z-50 w-72 bg-black absolute p-2 top-12 -left-16 rounded-md border-2 border-gray-500">
+            <div className="feedback-box h-fit z-50 w-72 bg-black absolute p-2 top-12 -left-20 rounded-md border-2 border-gray-500">
               <textarea name="" id="" 
                 value={feedbackText}
                 onChange={(e) => setFeedbackText(e.currentTarget.value)}
@@ -124,8 +122,8 @@ function TopNav({info}) {
           : null}
 
         </div>
-        <div className="userLogo  text-white h-10 w-10 mx-4 mt-1 mr-8 hidden sm:block">
-          <img src={user} alt="" />
+        <div className="userLogo text-white h-9 w-9 ml-3 hidden sm:block">
+          <img src={user} alt="" className="" />
         </div>
       </div>
 

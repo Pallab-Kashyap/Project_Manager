@@ -176,25 +176,27 @@ function ProjectItems({ searchQuery, projectSetting }) {
         <ProjectSettings setIsProjectSetting={setIsProjectSetting}/>
       )}
       {projectList.map((project) => (
-        <div className="relative mb-5 px-5 sm:px-0 bg-[#2a2a3454] border-2 border-neutral-800 rounded-3xl" key={project.id}>
+        <div className="relative mb-3 px-5 sm:px-0 bg-[#2a2a3454] border-2 border-neutral-800 rounded-2xl" key={project.id}>
 
           <Link to={`/project/${project.id}`}
             key={project.id}
-            className=" p-2 px-5 rounded-3xl sm:grid grid-cols-5 relative"
+            className=" p-2 px-5 sm:grid grid-cols-5 relative"
             onClick={handleProjectClick}
           >
-            <div className="text-white  ">
-              <h1 className="truncate text-2xl sm:text-3xl  overflow-hidden text-ellipsis whitespace-nowrap ">
-                {project.projectName}
-              </h1>
 
-              <div className="flex mt-3 sm:mt-4 gap-4">
-                <img src={userIcon} alt="" className="h-6 w-6 sm:h-7 sm:w-7" />
-                <p className="text-slate-400 text-xl truncate overflow-hidden text-ellipsis whitespace-nowrap sm:text-2xl relative -top-1">
+            <div className="text-white">
+              <h2 className="truncate text-2xl overflow-hidden text-ellipsis whitespace-nowrap ">
+                {project.projectName}
+              </h2>
+
+              <div className="flex mt-3 sm:mt-3 gap-4">
+                <img src={userIcon} alt="" className="h-6 w-6 sm:h-6 sm:w-6" />
+                <p className="text-slate-400 text-xl truncate overflow-hidden text-ellipsis whitespace-nowrap sm:text-xl relative -top-1">
                   {project.creator.userName}
                 </p>
               </div>
             </div>
+
             <ProgressBar
               info={{
                 total: project.TaskCount?.totalTask || 0,
@@ -205,15 +207,16 @@ function ProjectItems({ searchQuery, projectSetting }) {
               info={{ startDate: project.startDate, endDate: project.endDate }}
             />
             <Status info={{ status: project.status }} />
-            <div className="pt-5 sm:flex justify-between hidden">
+            <div className="pt-5 sm:flex hidden">
               <MemberBox list={memberList} />
             </div>
 
             {/* LINK */}
           </Link>
+
             <div
               onClick={() => setIsProjectSetting(true)}
-              className="text-white mt-1 mr-3 p-2 text-2xl absolute top-7 cursor-pointer right-5 hidden sm:block"
+              className="text-white mt-1 p-2 text-2xl absolute top-7 cursor-pointer right-5 hidden sm:block"
             >
               <BsThreeDots />
             </div>

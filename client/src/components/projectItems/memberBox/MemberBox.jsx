@@ -36,8 +36,8 @@ function MemberBox({list}) {
   }, []);
 
   return (
-    <div onMouseEnter={() => setEmail([])} className="p-1 mt-1 w-fit group">
-      <div className="flex gap group-hover:hidden reletive">
+    <div onMouseEnter={() => setEmail([])} className="p-1 mt-1 group">
+      <div className="flex group-hover:hidden reletive">
         {members.map((user) => {
           {
             position += 10;
@@ -49,7 +49,7 @@ function MemberBox({list}) {
               className={` reletive ${state} border-2  border-white h-fit w-fit rounded-full`}
               key={user.id}
             >
-              <img src={userIcon} alt="" className="h-7 w-7" />
+              <img src={userIcon} alt="" className="h-6 w-6" />
             </div>
           );
         })}

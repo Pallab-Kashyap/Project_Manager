@@ -85,7 +85,7 @@ function TimeBar({info}) {
               <div className={`${bg} h-2  rounded-full }`} style={{width}}></div>
             </div>
             </div>
-            <div className='text-center mt-2 hidden group-hover:block text-slate-400'>remaining time: {res || remaining}</div>
+            <div className='text-center ml-6 mt-1 hidden group-hover:block text-slate-400 text-sm'>remaining time: {res || remaining}</div>
         </div>
     )
 }

@@ -41,11 +41,13 @@ function ProgressBar({ info }) {
     width = "0%";
   }
 
+  width = '100%'
+
   return (
-    <div className="progressBar hidden sm:block px-2 pt-0 mt-3 group ">
+    <div className="progressBar hidden sm:block px-2 mt-3 group ">
       <div className="flex gap-3 mt-4">
         <div className={`${color} text-xl `}>{icon}</div>
-        <div className="w-full mt-[1px] p-1 border-2 border-gray-500 rounded-full ">
+        <div className="w-full  p-1 border-2 border-gray-500 rounded-full ">
           <div
             className={`${bg} h-2 sm:mt-[0.2px]  rounded-full ${
               percentage === 100 ? "completed" : ""
@@ -58,7 +60,7 @@ function ProgressBar({ info }) {
       <button   
       onClick={(e) => {
         console.log('btn')}}
-      className="mt-2 hidden group-hover:block text-slate-400 hover:text-gray-200">
+      className="mt-1 hidden group-hover:block text-slate-400 hover:text-gray-200 text-sm">
         {info.total === 0
           ? "Add Task"
           : percentage === 100

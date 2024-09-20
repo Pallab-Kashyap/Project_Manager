@@ -69,10 +69,10 @@ function ProjectNav({search}) {
   ];
 
   return (
-    <div className="bg-neutral-60 py-2 px-16 text-white border-b-2 border-gray-600 flex justify-between ">
+    <div className="bg-neutral-60 py-2 px-10 text-white border-b-2 border-gray-600 flex justify-between ">
       {/* nav actions */}
       <div className=" hidden sm:block py-[10px] ">
-        <ul className="flex gap-8 text-lg text-gray-30 ">
+        <ul className="flex gap-5 text-gray-30 text-base">
           {options.map((opt) => (
             <li className="group " key={opt.option}>
               <NavLink to={opt.to} className="text-gray-300 group-hover:text-white">
@@ -85,9 +85,9 @@ function ProjectNav({search}) {
       </div>
 
       <div className="flex ml-8 sm:ml-0 font-medium sm:gap-3 gap-4 items-center">
-            <Button classname="py-px px-5 border-2 border-gray-500 text-neutral-300 " text="sort" />
+            <Button classname="py-1 px-5 border-2 border-gray-500 text-neutral-300 " text="sort" />
             <Button
-              classname="py-px px-5 border-2 border-gray-500 text-neutral-300"
+              classname="py-1 px-5 border-2 border-gray-500 text-neutral-300"
               text="filter"
             />
             <SearchBar props={{ searchQuery, setSearchQuery }} />

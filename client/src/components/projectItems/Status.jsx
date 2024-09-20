@@ -43,8 +43,8 @@ function Status({info}) {
     }
 
     return (
-        <div className='text-white relative  sm:p-6 sm:px-16 flex justify-center whitespace-nowrap h-fit'>
-            <div className={`${bg} ${color} ${border} text-center opacity text-md rounded-2xl  p-1 px-3 flex justify-center items-center w-fit gap-2 absolute sm:relative top-[-42px] right-1 sm:top-auto sm:bottom-auto`}
+        <div className='text-white relative  sm:p-6 sm:px-16 flex justify-center whitespace-nowrap text-sm'>
+            <div className={`${bg} ${color} ${border} text-center opacity text-md rounded-2xl  p-1 px-3 flex justify-center items-center w-fit gap-2 absolute sm:relative top-[-32px] right-1 sm:top-auto sm:bottom-auto`}
 
             >
                 <div className={`dot ${dot} h-[8px] w-[8px]`}></div>

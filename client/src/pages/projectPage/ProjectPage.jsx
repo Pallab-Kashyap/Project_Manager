@@ -47,18 +47,17 @@ function ProjectPage() {
   }
 
   return (
-    <div className="h-screen md:flex md:flex-col relative">
-      {/* <div className=" pt-2 px-2 text-white">
-        <TopNav info={{topNavClick, isActive}}/>
-      </div> */}
-      <div className="sm:flex flex-1">
-        <div className={`sideNavTansition w-full  sm:w-20  ${isActive ? 'block  z-50 absolute bg-black ' : 'hidden '} sm:pt-16 sm:block border-r-2 border-gray-600 sm:hover:w-64`}>
-          <SideNav setIsHovered={setIsHovered} isActive={isActive}/>
+    <div className="md:flex relative">
+
+        <div className={`sideNavTansition w-full  sm:w-[4.2rem] h-screen ${
+          isActive ? "block  z-50 absolute bg-black " : "hidden "
+        } sm:block border-r-2 border-gray-600 sm:hover:w-52`}>
+          
+          <SideNav setIsHovered={setIsHovered} isHovered={isHovered} isActive={isActive}/>
         </div>
         <div className={`flex-1`}>
             <ProjectContainer />
         </div>
-      </div>
     </div>
 
     )
