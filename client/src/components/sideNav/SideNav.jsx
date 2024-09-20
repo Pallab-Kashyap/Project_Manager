@@ -41,7 +41,7 @@ function SideNav({setIsHovered, isActive}) {
                 onMouseLeave={()=>setIsHovered(false)}
             >
             <li className='hover:bg-gray-400 hover:bg-opacity-25 p-1 px-2 rounded-full'>
-                    <Link to='/project'
+                    <Link to='/project/1'
                         className='flex gap-3 transition-none'
                     >
                     

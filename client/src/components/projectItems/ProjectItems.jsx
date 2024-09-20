@@ -178,8 +178,7 @@ function ProjectItems({ searchQuery, projectSetting }) {
       {projectList.map((project) => (
         <div className="relative mb-5 px-5 sm:px-0 bg-[#2a2a3454] border-2 border-neutral-800 rounded-3xl" key={project.id}>
 
-          {/* LINK */}
-          <div
+          <Link to={`/project/${project.id}`}
             key={project.id}
             className=" p-2 px-5 rounded-3xl sm:grid grid-cols-5 relative"
             onClick={handleProjectClick}
@@ -211,13 +210,13 @@ function ProjectItems({ searchQuery, projectSetting }) {
             </div>
 
             {/* LINK */}
-          <div
-            onClick={() => setIsProjectSetting(true)}
-            className="text-white mt-1 mr-3 p-2 text-2xl absolute top-7 cursor-pointer right-5 hidden sm:block"
-          >
-            <BsThreeDots />
-          </div>
-          </div>
+          </Link>
+            <div
+              onClick={() => setIsProjectSetting(true)}
+              className="text-white mt-1 mr-3 p-2 text-2xl absolute top-7 cursor-pointer right-5 hidden sm:block"
+            >
+              <BsThreeDots />
+            </div>
         </div>
       ))}
     </>
