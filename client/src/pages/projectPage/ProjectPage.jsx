@@ -6,13 +6,12 @@ import "../home/Home.css"
 import HomeContainer from "../../components/HomeContainer";
 import { useSelector } from "react-redux";
 import { getUser } from "../../context/userSlice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ProjectContainer from "../../components/projectContainer/ProjectContainer";
 
 function ProjectPage() {
 
-  console.log('home comp renderd');
-
+  const { projectId } = useParams
   const [isHovered, setIsHovered] = useState(false)
   const [isActive, setIsActive] = useState(false)
   const [displaySize, setDisplaySize] = useState(window.innerWidth)
@@ -52,7 +51,7 @@ function ProjectPage() {
         <div className={`sideNavTansition w-full  sm:w-[4.2rem] h-screen ${
           isActive ? "block  z-50 absolute bg-black " : "hidden "
         } sm:block border-r-2 border-gray-600 sm:hover:w-52`}>
-          
+
           <SideNav setIsHovered={setIsHovered} isHovered={isHovered} isActive={isActive}/>
         </div>
         <div className={`flex-1`}>

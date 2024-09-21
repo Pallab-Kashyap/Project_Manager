@@ -29,7 +29,7 @@ function HomeContainer() {
 
         <div className=" pt-8 pl-10">
           <div className="flex ml-6 sm:ml-0 font-medium sm:gap-4 gap-4 flex-wrap-reverse">
-            <Button classname="py-0.5 px-4 text-center border-2 border-gray-500 text-neutral-300" text="sort" />
+            <Button classname="py-0.5 px-4 text-center border-2 border-gray-500 text-neutral-300" text="Sort" />
             <Button
               classname="py-1 px-4 border-2 border-gray-500 text-neutral-300"
               text="filter"

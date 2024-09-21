@@ -1,7 +1,7 @@
 import axios from "../utils/axios";
 
 const registerUser = async (data) => {
-    
+    console.log('REGISTER USER');
     try{
     const result = await axios.post('/auth/signin', data)
 

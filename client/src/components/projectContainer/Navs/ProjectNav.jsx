@@ -72,7 +72,7 @@ function ProjectNav({search}) {
     <div className="bg-neutral-60 py-2 px-10 text-white border-b-2 border-gray-600 flex justify-between ">
       {/* nav actions */}
       <div className=" hidden sm:block py-[10px] ">
-        <ul className="flex gap-5 text-gray-30 text-base">
+        <ul className="flex gap-5 text-gray-30 text-[0.9rem]">
           {options.map((opt) => (
             <li className="group " key={opt.option}>
               <NavLink to={opt.to} className="text-gray-300 group-hover:text-white">
@@ -90,7 +90,9 @@ function ProjectNav({search}) {
               classname="py-1 px-5 border-2 border-gray-500 text-neutral-300"
               text="filter"
             />
-            <SearchBar props={{ searchQuery, setSearchQuery }} />
+            
+              <SearchBar props={{ searchQuery, setSearchQuery }} />
+  
           </div>
 
       {/* user support */}

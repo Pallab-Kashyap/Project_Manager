@@ -12,7 +12,11 @@ function App() {
 
   return (
     //<Background>
+    
     <Router>
+      {/* <div className=' h-screen w-screen flex justify-center items-center'>
+      <button className="border-2 border-neutral-700 py-2 text-white font">share</button>
+      </div> */}
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/project/:id' element={<ProjectPage />} />

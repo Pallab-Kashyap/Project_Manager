@@ -34,7 +34,7 @@ function ProjectContainer() {
     }
 
     return (
-        <div className='bg-green'>
+        <div className='bg-green-30'>
 
             {/* PRJECT DETAILS AND CONTORL */}
             <div className="text-white">
@@ -49,7 +49,7 @@ function ProjectContainer() {
 
 
             {/* PROJECT ITEMS */}
-            <div className="px-16 py-10">
+            <div className="flex-1 max-h-[28.75rem] px-9 mt-5 sm:mt-8  rounded-xl overflow-hidden overflow-y-scroll">
                 <ProjectItems searchQuery={searchQuery} projectSetting={{projectSetting, setIsProjectSetting}}/>
             </div>
         </div>

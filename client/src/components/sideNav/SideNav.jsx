@@ -16,12 +16,17 @@ import {
   taskIcon,
   logoutIcon,
   projectIcon,
+  homeIcon,
 } from "../../assets/icons/";
 import CmpLogo from "../CmpLogo";
 
 function SideNav({ setIsHovered, isHovered , isActive }) {
   const sideNavItems = [];
   const list = [
+    // {
+    //   name: "Home",
+    //   icon: homeIcon,
+    // },
     {
       name: "Dashboard",
       icon: dashboardIcon,

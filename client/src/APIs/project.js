@@ -1,7 +1,7 @@
 import axios from "../utils/axios";
 
 const createProject = async (data) => {
-    
+    console.log('CREATE PROJECT');
     try{
     const result = await axios.post('/project', data)
 
