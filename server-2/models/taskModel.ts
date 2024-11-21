@@ -6,6 +6,8 @@ export interface TaskSchema extends Document {
     parentId: Schema.Types.ObjectId,
     userId: Schema.Types.ObjectId,
     taskName: string,
+    completed: boolean,
+    priority: string,
     startDate: Date,
     endDate: Date,
 }
@@ -25,6 +27,14 @@ const taskSchema: Schema<TaskSchema> = new Schema({
     userId: {
         type: Schema.Types.ObjectId,
         required: [true, 'creatorId required']
+    },
+    completed: {
+        type: Boolean,
+        default: false
+    },
+    priority: {
+        type: String,
+        default: 'In Progress'
     },
     startDate: {
         type: Date,

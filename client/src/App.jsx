@@ -6,7 +6,7 @@ import SignUP from './pages/Auth/SignUp'
 import Background from './components/Background/Background'
 import Login from './pages/Auth/LogIn'
 import ProjectPage from './pages/projectPage/ProjectPage'
-import KanbanContainer from './pages/kanban/KanbanContainer'
+
 
 function App() {
   const [count, setCount] = useState(0)

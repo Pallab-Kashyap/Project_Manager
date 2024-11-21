@@ -1,4 +1,5 @@
 import { Schema, model, Document, Types } from "mongoose";
+import { boolean } from "zod";
 
 // Enum for member positions
 export enum MemberPosition {
@@ -12,6 +13,7 @@ interface IProjectMember extends Document {
   projectId: Types.ObjectId; // References the Project model
   userId: Types.ObjectId;    // References the User model
   position: MemberPosition;  // Position in the project
+  confirm: boolean
   access?: boolean;          // Access status (optional)
   completedTasks?: number;   // Count of completed tasks
 }
@@ -34,6 +36,10 @@ const ProjectMemberSchema = new Schema<IProjectMember>(
       enum: Object.values(MemberPosition),
       default: MemberPosition.MEMBER,
       required: true,
+    },
+    confirm: {
+      type: Boolean,
+      default: false
     },
     access: {
       type: Boolean,
