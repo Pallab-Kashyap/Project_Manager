@@ -6,6 +6,7 @@ import SignUP from './pages/Auth/SignUp'
 import Background from './components/Background/Background'
 import Login from './pages/Auth/LogIn'
 import ProjectPage from './pages/projectPage/ProjectPage'
+import KanbanContainer from './pages/kanban/KanbanContainer'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -18,6 +19,7 @@ function App() {
       <button className="border-2 border-neutral-700 py-2 text-white font">share</button>
       </div> */}
       <Routes>
+
         <Route path='/' element={<Home />} />
         <Route path='/project/:id' element={<ProjectPage />} />
         <Route path='/signin' element={<SignUP />} />

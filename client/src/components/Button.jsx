@@ -1,7 +1,7 @@
 import React from 'react'
 
 function Button({classname = '', text, onClick = ()=>{}}) {
-    const defultStyle = 'rounded-xl text-sm'
+    const defultStyle = 'rounded-md text-sm'
     return (
         <button className={` ${defultStyle} ${classname}  align-middle`}
                 onClick={onClick}

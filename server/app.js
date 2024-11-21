@@ -14,7 +14,7 @@ const projectRouter = require("./routes/projectRouter");
 
 dotenv.config();
 connectDB();
-// sycnDB()
+sycnDB()
 
 const app = express();
 

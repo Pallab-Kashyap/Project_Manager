@@ -36,7 +36,7 @@ function ProjectControl({projectDtls}) {
         <div className=" flex gap-3 items-center ">
           <Button classname=" bg-transparent text-neutral-300 hover:text-gray-100 hover:bg-neutral-800 border-2 border-neutral-700 px-4 py-1" text="Chat"/>
           <Button classname=" bg-transparent text-neutral-300 hover:text-gray-100 hover:bg-neutral-800 border-2 border-neutral-700 mr-4 px-4 py-1" text="settings" />
-          <Button classname="createProjectBtn text-white py-0.5 px-4 text-xl font-semibold" text="Add Task"  />
+          <Button classname="createProjectBtn text-white py-2 px-4  font-semibold" text="Add Task"  />
 
         </div>
       </div>

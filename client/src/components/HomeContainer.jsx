@@ -37,7 +37,7 @@ function HomeContainer() {
             <SearchBar props={{ searchQuery, setSearchQuery }} />
           </div>
           <Button
-            classname={`z-40 absolute top-[5.2rem] text-white py-2 px-5 sm:ml-96 text-xl font-semibold ${
+            classname={`z-40 absolute top-[5.2rem] text-white py-2 px-5 sm:ml-96 text-base font-semibold ${
               isCreateProject
                 // ? " hidden bottom-[111px] right-[710px] activeCreateProjectBtn border-2 border-gray-500 backdrop-blur-sm bg-white/5"
                 ? " hidden"
