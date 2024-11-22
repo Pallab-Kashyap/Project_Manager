@@ -31,8 +31,13 @@ const login = asyncWrapper( async (req: Request, res: Response) => {
 
     user.password = ''
     
-
-    res.status(200).json({ token, user})
+    
+    res.status(200)
+        .cookie('authToken', token, {
+            httpOnly: true,
+            // secure: true
+        })
+        .json({ token, user })
 })
 
 const signin = asyncWrapper( async (req: Request, res: Response) => {
@@ -63,7 +68,12 @@ const signin = asyncWrapper( async (req: Request, res: Response) => {
     user.password = ''
     
 
-    res.status(200).json({ token, user})
+    res.status(200)
+    .cookie('authToken', token, {
+        httpOnly: true,
+        // secure: true
+    })
+    .json({ token, user })
 })
 
 const forgetPassword = asyncWrapper( async (req: Request, res: Response) => {
@@ -88,7 +98,7 @@ const forgetPassword = asyncWrapper( async (req: Request, res: Response) => {
 
     const tamplate = forgetPasswordTamplate(resetLink)
 
-    const emailSent = await sendEmail(email, tamplate)
+    const emailSent = await sendEmail(email, tamplate, 'Reset Password')
 
     if(!emailSent) return errorResponse(500, 'something went wrong please try again', res)
 

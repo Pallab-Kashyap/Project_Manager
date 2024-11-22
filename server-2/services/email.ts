@@ -1,9 +1,7 @@
-import { Document } from 'mongoose';
-import nodemailer from 'nodemailer';
-import { forgetPasswordTamplate } from '../utils/emailTemplates';
-import { UserSchema } from '../models/userModel';
 
-const sendEmail = async ( to: '' | [''], template = '<h1>PM</h1>' ) => {
+import nodemailer from 'nodemailer';
+
+const sendEmail = async ( to: '' | [''], html = '<h1>PM</h1>', subject: string ) => {
 
 
 try {
@@ -17,10 +15,9 @@ try {
 
         const mailOptions = {
             from: process.env.EMAIL,
-            to: to || 'pallabk19@gmail.com',
-            subject: 'Test Email',
-            text: 'Hello from Node.js!',
-            html: template,
+            to,
+            subject,
+            html
         };
     
         const info = await transporter.sendMail(mailOptions);

@@ -8,10 +8,10 @@ import apiResponse from "../utils/apiResponse";
 
 const createTask = asyncWrapper( async(req: Request ,res: Response) => {
 
-    const { userId, taskName, startDate, endDate, projectId} = req.body
+    const { userId, taskName, startDate, endDate, projectId } = req.body
 
     if(!userId || !taskName || !startDate || !endDate || !projectId)
-        return errorResponse(400, 'data required', res)
+        return errorResponse(400, '{ userId, taskName, startDate, endDate, projectId } are required fields', res)
 
     const task = await taskModel.create(req.body)
 
@@ -24,7 +24,30 @@ const getAllTasks = asyncWrapper( async(req: Request ,res: Response) => {
 
     const { userId } = req.body
 
-    const tasks = await taskModel.find({ userId })
+    let tasks = await taskMemberModel.aggregate([
+        { $match: { userId }},
+
+        {
+            $lookup : {
+                from: 'taskModel',
+                localField: 'taskId',
+                foreignField: '_id',
+                as: 'taskDetails'
+            }
+        },
+
+        { $unwind : '$taskDetails'},
+
+        {
+            $project: {
+              _id: 0, 
+              projectDetails: 1,
+            }
+          },
+
+        ]);
+    
+        tasks = tasks.map((entry) => entry.projectDetails);
 
     if(!tasks) return errorResponse(400, 'no tasks', res)
 

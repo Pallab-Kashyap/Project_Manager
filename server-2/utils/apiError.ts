@@ -7,7 +7,7 @@ import { Response } from "express";
 //     message: string
 // }
 
-const errorResponse = (statusCode: number, message: string, res: Response) => {
+const errorResponse = (statusCode: number, message: any, res: Response) => {
     res.status(statusCode).json({ message })
 }
 

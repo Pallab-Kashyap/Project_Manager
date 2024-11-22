@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken'
 import apiResponse from './apiResponse';
 import { response } from 'express';
 import errorResponse from './apiError';
+import { TokenPayload } from '../controllers/memberController';
 
 
 const generateToken = (data: {}, expiresIn: string) => {
@@ -9,7 +10,7 @@ const generateToken = (data: {}, expiresIn: string) => {
     const jwtSecret = process.env.JWT_SECRET;
 
     if(!jwtSecret){
-        return false
+        throw new Error('jwt secter is undefined')
     }
 
     const token = jwt.sign(data, jwtSecret, { expiresIn })
@@ -23,16 +24,20 @@ try {
         const jwtSecret = process.env.JWT_SECRET;
     
         if(!jwtSecret){
-            return false
+            throw new Error('jwt secter is undefined')
         }
     
-        const verifiedToken = jwt.verify(token, jwtSecret)
+        const verifiedToken = jwt.verify(token, jwtSecret) as TokenPayload
+
+        if(!verifiedToken){
+            throw new Error('token is invalid')
+        }
     
         return verifiedToken
 
 } catch (error) {
     console.log(error);
-    return false
+    throw new Error('token is invalid')
 }
 }
 

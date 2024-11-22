@@ -1,47 +1,99 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { asyncWrapper } from "../utils/asyncWarpper";
 import errorResponse from "../utils/apiError";
 import projectModel from "../models/projectModel";
 import projectMemberModel, { MemberPosition } from "../models/projectMemberModel";
+import mongoose from "mongoose";
 
 
-const createProject = asyncWrapper( async(req: Request ,res: Response) => {
+
+const createProject = asyncWrapper( async(req: Request ,res: Response, next: NextFunction) => {
 
     const { userId, projectName, startDate, endDate, status } = req.body
 
-    if(!userId || !projectName || !startDate || !endDate || !status)
+    if(!userId || !projectName || !startDate || !endDate)
         return errorResponse(400, 'data required', res)
 
-    const project = await projectModel.create({
+    const session = await mongoose.startSession()
+    session.startTransaction()
+
+      const project = new projectModel({
+          userId,
+          projectName,
+          startDate,
+          endDate,
+          status
+      })
+
+     const member = new projectMemberModel({
+        projectId : project._id,
         userId,
-        projectName,
-        startDate,
-        endDate,
-        status
-    })
+        position: MemberPosition.OWNER,
+        confirm: true
+     })
 
-    if(!project) return errorResponse(500, 'something went wrong', res)
+     try {
 
-    res.status(201).json({ project: project })
+        await project.save({ session })
+        await member.save({ session })
+
+     await session.commitTransaction()
+      res.status(201).json({ project: project })
+  } catch (error) {
+    await session.abortTransaction()
+    next(error)
+  }
+  finally{
+    await session.endSession()
+  }
+
 })
 
 const getAllProjects = asyncWrapper( async(req: Request ,res: Response) => {
 
     const { userId } = req.body
+console.log(userId);
+    let projects = await projectMemberModel.aggregate([
+        
+        { $match: { userId: new mongoose.Types.ObjectId(userId) } },
+  
+        
+        {
+          $lookup: {
+            from: 'projects', 
+            localField: 'projectId',
+            foreignField: '_id',
+            as: 'projectDetails',
+          },
+        },
+  
+        
+        { $unwind: '$projectDetails' },
+  
+        
+        {
+          $project: {
+            _id: 0, 
+            projectDetails: 1,
+          },
+        },
+      ]);
 
-    const projects = await projectModel.find({ userId })
+  console.log(projects);
+    projects = projects.map((entry) => entry.projectDetails);
 
     if(!projects) return errorResponse(400, 'no projects', res)
-
+console.log(projects);
     res.status(200).json({ projects })
 })
 
 const getProjectById = asyncWrapper( async(req: Request ,res: Response) => {
     const { projectId } = req.params
 
+
     if(!projectId) return errorResponse(400, 'projectId required', res)
 
-    const project = projectModel.findById(projectId)
+    const project = await projectModel.findById(projectId)
 
     if(!project)  return errorResponse(400, 'invalid project ID of user ID', res)
     
@@ -50,8 +102,7 @@ const getProjectById = asyncWrapper( async(req: Request ,res: Response) => {
 
 const updateProject = asyncWrapper( async(req: Request ,res: Response) => {
 
-    const { userId, update } = req.body
-    const { projectId } = req.params
+    const { userId, data, projectId } = req.body
     
     const projectMember = await projectMemberModel.findOne({userId, projectId}) 
 
@@ -63,11 +114,11 @@ const updateProject = asyncWrapper( async(req: Request ,res: Response) => {
         return errorResponse(401, 'Unauthorized to perform this task', res)
     }
 
-    if(!update || Object.keys(update).length === 0){
+    if(!data || Object.keys(data).length === 0){
         return errorResponse(400, 'update field missing', res)
     }
 
-    const updatedProject = await projectModel.findByIdAndUpdate(projectId, update, { 
+    const updatedProject = await projectModel.findByIdAndUpdate(projectId, data, { 
         new: true,
         runValidators: true
      })
@@ -79,10 +130,9 @@ const updateProject = asyncWrapper( async(req: Request ,res: Response) => {
     res.status(200).json({ project: updatedProject })
 })
 
-const deleteProject = asyncWrapper( async(req: Request ,res: Response) => {
+const deleteProject = asyncWrapper( async(req: Request ,res: Response, next: NextFunction) => {
 
-    const { projectId } = req.params
-    const { userId } = req.body
+    const { userId, projectId } = req.body
 
     const member = await projectMemberModel.findOne({ projectId, userId })
 
@@ -94,9 +144,22 @@ const deleteProject = asyncWrapper( async(req: Request ,res: Response) => {
         return errorResponse(401, 'Unauthorized to perform this activity', res)
     }
 
-    await projectModel.findByIdAndDelete(projectId)
+    const session = await mongoose.startSession();
+    session.startTransaction()
 
-    res.status(204)
+try {
+        await projectModel.findByIdAndDelete(projectId).session(session)
+        await projectMemberModel.deleteMany({ projectId }).session(session)
+    
+        await session.commitTransaction()
+        res.status(204).send()
+} catch (error) {
+    await session.abortTransaction()
+    next(error)
+}finally{
+    session.endSession()
+}
+
 })
 
 

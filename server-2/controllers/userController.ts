@@ -4,13 +4,18 @@ import { asyncWrapper } from "../utils/asyncWarpper"
 import errorResponse from "../utils/apiError"
 
 const fetchUser = asyncWrapper( async (req: Request, res: Response) => {
-    const { userId } = req.body
+try {
+        const { userId } = req.body
+        console.log(userId);
 
-    const user = await userModel.findById(userId).select('-password')
-
-    if(!user) return errorResponse(404, 'user not found', res)
-
-    res.status(200).json({ user })
+        const user = await userModel.findById(userId).select('-password')
+    
+        if(!user) return errorResponse(404, 'user not found', res)
+    
+        res.status(200).json({ user })
+} catch (error) {
+    console.log('ERROR: ', error);
+}
 })
 
 const updateUser = () => {}

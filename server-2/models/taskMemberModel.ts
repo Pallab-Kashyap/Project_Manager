@@ -1,30 +1,30 @@
-import { Schema, model, Document, Types } from "mongoose";
+import mongoose, { Schema,Document, Types } from "mongoose";
 
-// Enum for Member Position
+
 export enum MemberPosition {
   MEMBER = "member",
   ADMIN = "admin",
   OWNER = "owner",
 }
 
-// Interface for TaskMember document
+
 interface ITaskMember extends Document {
-  taskId: Types.ObjectId; // References the Task model
-  userId: Types.ObjectId; // References the User model
-  position: MemberPosition; // Position in the task
+  taskId: Types.ObjectId; 
+  userId: Types.ObjectId; 
+  position: MemberPosition;
 }
 
-// Mongoose Schema
+
 const TaskMemberSchema = new Schema<ITaskMember>(
   {
     taskId: {
       type: Schema.Types.ObjectId,
-      ref: "Task", // Reference to Task model
+      ref: "Task", 
       required: true,
     },
     userId: {
       type: Schema.Types.ObjectId,
-      ref: "User", // Reference to User model
+      ref: "User", 
       required: true,
     },
     position: {
@@ -35,11 +35,11 @@ const TaskMemberSchema = new Schema<ITaskMember>(
     },
   },
   {
-    timestamps: true, // Automatically adds createdAt and updatedAt
+    timestamps: true, 
   }
 );
 
-// Mongoose Model
-const taskMemberModel = model<ITaskMember>("TaskMember", TaskMemberSchema);
+
+const taskMemberModel = mongoose.models.taskMemberModel || mongoose.model('TaskMemeber', TaskMemberSchema);
 
 export default taskMemberModel;

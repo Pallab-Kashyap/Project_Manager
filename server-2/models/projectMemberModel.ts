@@ -1,24 +1,22 @@
-import { Schema, model, Document, Types } from "mongoose";
-import { boolean } from "zod";
+import mongoose, { Schema, Document, Types } from "mongoose";
 
-// Enum for member positions
 export enum MemberPosition {
   MEMBER = "member",
   ADMIN = "admin",
   OWNER = "owner",
 }
 
-// Interface for TypeScript type safety
 interface IProjectMember extends Document {
-  projectId: Types.ObjectId; // References the Project model
-  userId: Types.ObjectId;    // References the User model
-  position: MemberPosition;  // Position in the project
+  projectId: Types.ObjectId; 
+  userId: Types.ObjectId;    
+  position: MemberPosition;  
   confirm: boolean
-  access?: boolean;          // Access status (optional)
-  completedTasks?: number;   // Count of completed tasks
+  access?: boolean;          
+  completedTasks?: number;
+  email?: string  
 }
 
-// Mongoose Schema
+
 const ProjectMemberSchema = new Schema<IProjectMember>(
   {
     projectId: {
@@ -39,11 +37,15 @@ const ProjectMemberSchema = new Schema<IProjectMember>(
     },
     confirm: {
       type: Boolean,
-      default: false
+      required: true
+    },
+    email: {
+      type: String,
+      default: ''
     },
     access: {
       type: Boolean,
-      default: false, // Uncomment if you want a default value
+      default: false, 
     },
     completedTasks: {
       type: Number,
@@ -51,11 +53,11 @@ const ProjectMemberSchema = new Schema<IProjectMember>(
     },
   },
   {
-    timestamps: true, // Automatically adds createdAt and updatedAt fields
+    timestamps: true, 
   }
 );
 
-// Mongoose Model
-const projectMemberModel = model<IProjectMember>("ProjectMember", ProjectMemberSchema);
+
+const projectMemberModel = mongoose.models.projectMemberModel || mongoose.model('ProjectMember', ProjectMemberSchema);
 
 export default projectMemberModel;

@@ -1,5 +1,12 @@
 import mongoose, { Schema, Document } from "mongoose";
 
+export enum ProjectStatus {
+    IN_PORGRESS = 'In Progress',
+    HOLD = 'ON Hold',
+    COMPLETED = 'Completed',
+    NOT_STARTED = 'Not Started'
+}
+
 export interface ProjectSchema extends Document {
     projectName: string,
     userId: Schema.Types.ObjectId,
@@ -18,7 +25,6 @@ const projectSchema: Schema<ProjectSchema> = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: [true, 'email is required'],
-        unique: true,
     },
     // description: {
     //     type: String,
@@ -32,14 +38,16 @@ const projectSchema: Schema<ProjectSchema> = new Schema({
         type: Date,
     },
     status: {
-        type: String
+        type: String,
+        enum: Object.values(ProjectStatus),
+        default: ProjectStatus.NOT_STARTED
     }
 },
 { timestamps: true }
 )
 
 
+const projectModel = mongoose.models.projectModel || mongoose.model('Project', projectSchema);
 
-const projectModel = mongoose.model<ProjectSchema>('User', projectSchema)
 
 export default projectModel

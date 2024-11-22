@@ -90,7 +90,7 @@ const forgetPasswordTamplate = (resetLink: string, currentYear = 2020, websiteNa
 </html>
 `
 
-const inviteTemplate = (projectName: string, invitedBy: string, position: string, link: string) => `<!DOCTYPE html>
+const inviteTemplate = (projectName: string, invitedBy: string, position: string) => `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -154,18 +154,21 @@ const inviteTemplate = (projectName: string, invitedBy: string, position: string
             <p>You have been invited to join the project <strong>${projectName}</strong>!</p>
             <p>This project was created by <strong>${invitedBy}</strong> and you have been assigned the position of <strong>${position}</strong>.</p>
             <p>We are excited to have you on board and look forward to working with you!</p>
-            <a href="${link}" class="button">Join the Project</a>
-        </div>
-        <div class="footer">
-            <p>If you did not expect this invitation, please disregard this email.</p>
-        </div>
-    </div>
-</body>
-</html>
 `
+const addLinkToEmailTamplate = (link: string) => 
+`    <a href="${link}" class="button">Join the Project</a>
+    </div>
+    <div class="footer">
+        <p>If you did not expect this invitation, please disregard this email.</p>
+    </div>
+</div>
+</body>
+</html>`
+
 
 export {
     forgetPasswordTamplate,
-    inviteTemplate
+    inviteTemplate,
+    addLinkToEmailTamplate,
 }
 

@@ -3,17 +3,24 @@ import { asyncWrapper } from "../utils/asyncWarpper"
 import errorResponse from "../utils/apiError"
 import projectMemberModel from "../models/projectMemberModel"
 import { inviteTemplate } from "../utils/emailTemplates"
-import sendEmail from "../services/email"
 import userModel from "../models/userModel"
 import apiResponse from "../utils/apiResponse"
 import projectModel from "../models/projectModel"
 import {generateToken, verifyToken} from "../utils/generateAndVerifyToken"
 import jwt from 'jsonwebtoken'
+import sendEmailsToMembers from "../services/redis"
+import mongoose from "mongoose"
+
+export interface TokenPayload {
+    projectId: string;
+    email: string;
+}
 
 
-const sendRequestToJoin =  async(members: [''], projectName: string, invitedBy: string, position: string, link: string) => {
-    const template = inviteTemplate(projectName, invitedBy, position, link)
-    await sendEmail(members, template)
+const sendRequestToJoin =  async(emails: [''], projectId: mongoose.Schema.Types.ObjectId, projectName: string, invitedBy: string, position: string) => {
+    const template = inviteTemplate(projectName, invitedBy, position)
+    const subject = `You're Invited to a Project!`
+    sendEmailsToMembers(emails, projectId, subject, template)
 }
 
 const saveMembersInDB = async (members: [{}]) => {
@@ -51,16 +58,10 @@ const addMember = asyncWrapper( async(req: Request ,res: Response) => {
     const userName = user.userName
     const projectName = project.projectName
     
-    const token = generateToken({ projectId }, '10d')
 
-    if(!token){
-        return errorResponse(500, 'jwtSecret is undefined', res)
-    }
+    await sendRequestToJoin(email, projectId, projectName, userName, position)
 
-    const link = `http://localhost:5173/onbording/token=${token}`
-    await sendRequestToJoin(email, projectName, userName, position, link)
-
-    const members = email.map((ele: string) => ({ userId, projectId, position, ele}))
+    const members = email.map((userEmail: string) => ({ email: userEmail, projectId, position}))
     saveMembersInDB(members)
 
     res.status(204)
@@ -80,12 +81,47 @@ const joinRequestAccepted = asyncWrapper( async(req: Request, res: Response) => 
         return errorResponse(500, 'token is invalid', res)
     }
 
-    // const { projectId } = verifiedToken
+    const { projectId, email } = verifiedToken
 
+    if(!projectId || !email) {
+        return errorResponse(400, 'token is invalid', res)
+    }
 
+    const updatedMember = await projectMemberModel.findOneAndUpdate(
+        { projectId, email }, 
+        [
+          {
+            $set: {
+              userId: {
+                $ifNull: [
+                  { $arrayElemAt: [{ $map: { input: '$user', as: 'u', in: '$$u._id' } }, 0] },
+                  null,
+                ],
+              },
+              verify: true,
+              email: '',
+            },
+          },
+        ],
+        { new: true }
+      );
+    
+      if (!updatedMember) {
+        return errorResponse(404, 'No matching project member entry or user not found', res);
+      }
+
+      apiResponse(201, updatedMember, 'add as member', res)
 
 })
 
 const removeMember = asyncWrapper( async(req: Request, res: Response) => {
+    const { userId, memberId, projectId } = req.body
 
+    
 })
+
+export {
+    addMember,
+    joinRequestAccepted,
+    removeMember
+}
