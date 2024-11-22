@@ -27,7 +27,6 @@ const ProjectMemberSchema = new Schema<IProjectMember>(
     userId: {
       type: Schema.Types.ObjectId,
       ref: "User",
-      required: true,
     },
     position: {
       type: String,
@@ -37,7 +36,7 @@ const ProjectMemberSchema = new Schema<IProjectMember>(
     },
     confirm: {
       type: Boolean,
-      required: true
+      default: false
     },
     email: {
       type: String,

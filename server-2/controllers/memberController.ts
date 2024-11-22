@@ -36,15 +36,10 @@ const addMember = asyncWrapper( async(req: Request ,res: Response) => {
 
     const { userId, projectId, position, email} = req.body
 
-    if(!userId || !projectId || !position || !(email && email.length != 0)){
-        return errorResponse(400, 'data required', res);
+    if(!userId || !projectId || !position || !(email && typeof(email) === 'object' && email.length != 0)){
+        return errorResponse(400, '{ userId, projectId, position, email = string[] } are required', res);
     }
 
-    await projectMemberModel.create({
-        userId,
-        projectId,
-        position
-    })
 
     const [user, project] = await Promise.all([
         userModel.findById(userId).select('userName'),
@@ -64,14 +59,14 @@ const addMember = asyncWrapper( async(req: Request ,res: Response) => {
     const members = email.map((userEmail: string) => ({ email: userEmail, projectId, position}))
     saveMembersInDB(members)
 
-    res.status(204)
+    res.status(204).send()
 })
 
 const joinRequestAccepted = asyncWrapper( async(req: Request, res: Response) => {
 
     const { token } = req.body
 
-    if(token){ 
+    if(!token){ 
         return errorResponse(400, 'token is undefined', res)
     }
   
