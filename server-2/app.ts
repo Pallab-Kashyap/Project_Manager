@@ -1,6 +1,8 @@
-import express, { Request, Response, urlencoded } from 'express'
 import dotenv from 'dotenv'
-import connectDB from './config/db';
+dotenv.config()
+
+import express, { Request, Response, urlencoded } from 'express'
+import connectDB from './config/dbConfig';
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 
@@ -9,15 +11,19 @@ import userRouter from './routes/userRoute'
 import projectRouter from './routes/projectRoute'
 import taskRouter from './routes/taskRoute'
 import memberRouter from './routes/memberRoutes'
+import docRouter from './routes/docRoute'
+
 import { globalErrorHandler } from './middlewares/globalErrorHandler';
 import passport from './services/Oauth'
 import session from 'express-session';
+import { getEnvVariable } from './utils/getEnvVariable';
+
 
 
 
 const app = express();
 
-dotenv.config()
+
 connectDB()
 
 app.use(session({
@@ -29,7 +35,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 
-app.use(express.json())
+app.use(express.json({ limit: '1mb'}))
 app.use(urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(cors({
@@ -54,9 +60,10 @@ app.use('/api/v1/user', userRouter)
 app.use('/api/v1/project', projectRouter)
 app.use('/api/v1/task', taskRouter)
 app.use('/api/v1/member', memberRouter)
+app.use('/upload', docRouter)
 
 app.use(globalErrorHandler)
 
-const PORT : string | number = process.env.PORT || 3000
+const PORT : string | number = getEnvVariable('PORT')
 
 app.listen(PORT, () => { console.log(`server started and port: ${PORT}`)})
