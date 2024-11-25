@@ -6,8 +6,8 @@ import { inviteTemplate } from "../utils/emailTemplates"
 import userModel from "../models/userModel"
 import apiResponse from "../utils/apiResponse"
 import projectModel from "../models/projectModel"
-import {generateToken, verifyToken} from "../utils/generateAndVerifyToken"
-import jwt from 'jsonwebtoken'
+import {verifyToken} from "../utils/generateAndVerifyToken"
+
 import sendEmailsToMembers from "../services/redis"
 import mongoose from "mongoose"
 

@@ -6,7 +6,6 @@ import bcrypt from 'bcrypt'
 import jwt from "jsonwebtoken";
 import sendEmail from "../services/email";
 import { forgetPasswordTamplate } from "../utils/emailTemplates";
-import apiResponse from "../utils/apiResponse";
 
 
 const login = asyncWrapper( async (req: Request, res: Response) => {
